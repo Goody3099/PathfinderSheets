@@ -18,6 +18,6 @@ namespace PathfinderSheets.Data
         public DbSet<CharacterSheet> CharacterSheet { get; set; }
         public DbSet<Class> Class { get; set; }
         public DbSet<Race> Race { get; set; }
-        public DbSet<Users> Users { get; set; }
+        public DbSet<UserProfile> UserProfile { get; set; }
     }
 }

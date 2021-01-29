@@ -11,10 +11,10 @@ DROP TABLE IF EXISTS [CharacterSheet];
 DROP TABLE IF EXISTS [Race];
 DROP TABLE IF EXISTS [Class];
 DROP TABLE IF EXISTS [Alignment];
-DROP TABLE IF EXISTS [Users];
+DROP TABLE IF EXISTS [UserProfile];
 GO
 
-CREATE TABLE [Users] (
+CREATE TABLE [UserProfile] (
   [Id] integer PRIMARY KEY IDENTITY,
   [FirebaseUserId] NVARCHAR(28) NOT NULL,
   [DisplayName] nvarchar(50) NOT NULL,
@@ -28,7 +28,7 @@ GO
 
 CREATE TABLE [CharacterSheet] (
   [Id] integer PRIMARY KEY,
-  [UserId] integer,
+  [UserProfileId] integer,
   [ChracterName] nvarchar(255),
   [CharacterPicture] nvarchar(255),
   [AlignmentId] integer,
@@ -134,7 +134,7 @@ CREATE TABLE [Race] (
 )
 GO
 
-ALTER TABLE [CharacterSheet] ADD FOREIGN KEY ([UserId]) REFERENCES [Users] ([Id])
+ALTER TABLE [CharacterSheet] ADD FOREIGN KEY ([UserProfileId]) REFERENCES [UserProfile] ([Id])
 GO
 
 ALTER TABLE [CharacterSheet] ADD FOREIGN KEY ([AlignmentId]) REFERENCES [Alignment] ([Id])

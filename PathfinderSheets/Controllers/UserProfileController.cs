@@ -11,11 +11,10 @@ namespace PathfinderSheets.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsersController : ControllerBase
+    public class UserProfileController : ControllerBase
     {
-        private IUsersRepository _repo;
-
-        public UsersController(IUsersRepository repo)
+        private readonly IUserProfileRepository _repo;
+        public UserProfileController(IUserProfileRepository repo)
         {
             _repo = repo;
         }
@@ -27,15 +26,14 @@ namespace PathfinderSheets.Controllers
         }
 
         [HttpPost]
-        public IActionResult Post(Users users)
+        public IActionResult Post(UserProfile userProfile)
         {
-            users.CreateDateTime = DateTime.Now;
-            _repo.Add(users);
+            userProfile.CreateDateTime = DateTime.Now;
+            _repo.Add(userProfile);
             return CreatedAtAction(
                 nameof(GetUserProfile),
-                new { firebaseUserId = users.FirebaseUserId },
-                users);
-
+                new { firebaseUserId = userProfile.FirebaseUserId },
+                userProfile);
         }
     }
 }

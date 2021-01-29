@@ -9,7 +9,7 @@ namespace PathfinderSheets.Models
     {
         public int Id { get; set; }
         public int UserId { get; set; }
-        public Users Users { get; set; }
+        public UserProfile Users { get; set; }
         public string CharacterName { get; set; }
         public string CharacterPicture { get; set; }
         public int AlignmentId { get; set; }

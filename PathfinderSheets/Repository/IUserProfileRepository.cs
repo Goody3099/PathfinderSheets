@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace PathfinderSheets.Repository
 {
-    public interface IUsersRepository
+    public interface IUserProfileRepository
     {
-        void Add(Users users);
-        User GetByFirebaseUserId(string firebaseUserId);
+        void Add(UserProfile userProfile);
+        UserProfile GetByFirebaseUserId(string firebaseUserId);
     }
 }

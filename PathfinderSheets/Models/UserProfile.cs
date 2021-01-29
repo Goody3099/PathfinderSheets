@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace PathfinderSheets.Models
 {
-    public class Users
+    public class UserProfile
     {
         public int Id { get; set; }
         public string FirebaseUserId { get; set; }
