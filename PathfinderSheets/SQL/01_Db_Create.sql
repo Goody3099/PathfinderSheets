@@ -114,7 +114,7 @@ GO
 CREATE TABLE [Class] (
   [Id] integer PRIMARY KEY,
   [ClassName] nvarchar(255),
-  [Level] integer,
+  [CharacterLevel] integer,
   [BaB] integer,
   [Reflex] integer,
   [Will] integer,
@@ -145,4 +145,3 @@ GO
 
 ALTER TABLE [CharacterSheet] ADD FOREIGN KEY ([ClassId]) REFERENCES [Class] ([Id])
 GO
-
