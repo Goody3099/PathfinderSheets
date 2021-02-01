@@ -29,16 +29,8 @@ const AppHeader = () => {
   return (
     <div>
       <Navbar color="dark" dark expand="md">
-        <NavbarBrand tag={Link} to="/">
-          <img
-            id="header-logo"
-            src="/quill.png"
-            width="30"
-            height="30"
-            className="mr-1"
-            alt="Quill Logo"
-          />
-          Tabloid
+        <NavbarBrand tag={Link} to="/home">
+          PathfinderSheets
         </NavbarBrand>
         <NavbarToggler onClick={toggle} />
         <Collapse isOpen={isOpen} navbar>
@@ -46,8 +38,8 @@ const AppHeader = () => {
             {user ? (
               <>
                 <NavItem>
-                  <NavLink to="/explore" tag={Link}>
-                    Explore
+                  <NavLink to="/home" tag={Link}>
+                    Home
                   </NavLink>
                 </NavItem>
                 {isAdmin() && (
@@ -58,7 +50,9 @@ const AppHeader = () => {
                   </NavItem>
                 )}
                 <NavItem>
-                  <NavLink onClick={logoutAndReturn}>Logout</NavLink>
+                  <NavLink onClick={logoutAndReturn} tag={Link}>
+                    Logout
+                    </NavLink>
                 </NavItem>
               </>
             ) : (

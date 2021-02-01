@@ -9,7 +9,7 @@ const ApplicationViews = () => {
 
   return (
     <Switch>
-      <Route path="/" exact>
+      <Route path="/home" exact>
         {isLoggedIn ? <p>Home</p> : <Redirect to="/login" />}
       </Route>
       <Route path="/login">

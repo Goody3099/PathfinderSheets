@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS [UserProfile];
 GO
 
 CREATE TABLE [UserProfile] (
-  [Id] integer PRIMARY KEY IDENTITY,
+  [Id] integer PRIMARY KEY,
   [FirebaseUserId] NVARCHAR(28) NOT NULL,
   [DisplayName] nvarchar(50) NOT NULL,
   [FirstName] nvarchar(50) NOT NULL,

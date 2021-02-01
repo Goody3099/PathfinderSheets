@@ -18,10 +18,12 @@ const Login = () => {
     login(email, password)
       .then((user) => {
         setLoading(false);
+        console.log(user)
         history.push("/");
       })
       .catch((err) => {
         setLoading(false);
+        console.log(err)
       });
   };
 
@@ -29,7 +31,6 @@ const Login = () => {
     <div className="login-form">
       <form onSubmit={handleSubmit}>
         <div className="avatar bg-primary">
-          <img src="/quill.png" alt="Avatar" />
         </div>
         <h2 className="text-center">User Login</h2>
         <div className="form-group">

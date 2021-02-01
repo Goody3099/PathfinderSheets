@@ -8,13 +8,13 @@ namespace PathfinderSheets.Models
     public class CharacterSheet
     {
         public int Id { get; set; }
-        public int UserId { get; set; }
+        public int UserProfileId { get; set; }
         public UserProfile Users { get; set; }
         public string CharacterName { get; set; }
         public string CharacterPicture { get; set; }
         public int AlignmentId { get; set; }
         public Alignment Alignment { get; set; }
-        public int Characterlevel { get; set; }
+        public int CharacterLevel { get; set; }
         public int ClassId { get; set; }
         public Class Class { get; set; }
         public int RaceId { get; set; }
