@@ -39,7 +39,12 @@ const AppHeader = () => {
               <>
                 <NavItem>
                   <NavLink to="/home" tag={Link}>
-                    Home
+                    My Character Sheets
+                  </NavLink>
+                </NavItem>
+                <NavItem>
+                  <NavLink to="/form" tag={Link}>
+                    New Character
                   </NavLink>
                 </NavItem>
                 {isAdmin() && (

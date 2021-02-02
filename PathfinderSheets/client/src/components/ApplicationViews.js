@@ -3,6 +3,8 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import { UserProfileContext } from "../providers/UserProfileProvider";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
+import Home from "../pages/Home";
+import CharacterSheetForm from "./CharacterSheetForm";
 
 const ApplicationViews = () => {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -10,7 +12,10 @@ const ApplicationViews = () => {
   return (
     <Switch>
       <Route path="/home" exact>
-        {isLoggedIn ? <p>Home</p> : <Redirect to="/login" />}
+        {isLoggedIn ? <Home /> : <Redirect to="/login" />}
+      </Route>
+      <Route path="/form" exact>
+        {isLoggedIn ? <CharacterSheetForm /> : <Redirect to="/login" />}
       </Route>
       <Route path="/login">
         <Login />
