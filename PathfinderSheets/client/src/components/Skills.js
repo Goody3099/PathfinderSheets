@@ -5,6 +5,7 @@ const Skills = ({skill}) => {
 
 return (
     <>
+    <Col md={{offset:2}}>
     <Row>
     <Label md={2}>{skill}</Label>
     <Col md={2}>
@@ -17,6 +18,7 @@ return (
         <Input readOnly value />
     </Col>
     </Row>
+    </Col>
     <br></br>
     </>
 )
