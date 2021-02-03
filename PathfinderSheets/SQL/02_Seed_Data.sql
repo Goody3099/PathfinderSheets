@@ -4,7 +4,7 @@ values (1, 'Lawful Good'), (2, 'Neutral Good'), (3, 'Chaotic Good'),
 	   (4, 'Lawful Neutral'), (5, 'Neutral'), (6, 'Chaotic Neutral'), 
 	   (7, 'Lawful Evil'), (8, 'Neutral Evil'), (9, 'Chaotic Evil');
 
-insert into [Class] ([Id], [ClassName], [Level], [BaB], [Fort], [Reflex],[Will], [HitDie], [SkillPoints])
+insert into [Class] ([Id], [ClassName], [CharacterLevel], [BaB], [Fort], [Reflex],[Will], [HitDie], [SkillPoints])
 values (1, 'Barbarian', 1, 1, 2, 0, 0, 12, 4),
 	(2, 'Barbarian', 2, 2, 3, 0, 0, 12, 4),
 	(3, 'Barbarian', 3, 3, 3, 1, 1, 12, 4),
@@ -227,11 +227,11 @@ values (1, 'Barbarian', 1, 1, 2, 0, 0, 12, 4),
 	(220, 'Wizard', 20, 10, 6, 6, 12, 6, 2);
 
 insert into [Race] ([Id], [RaceName], [MovementSpeed], [Vision], [BonusAttributes], [Size])
-values (1, 'Half-elves', 30, 'Low-Light', '+2 of your choice', 'Medium'),
-	(2, 'Dwarves', 20, 'Darkvision', '+2 Con, +2 Wis, -2 Cha', 'Medium'),
-	(3, 'Elves', 30, 'Low-Light', '+2 Dex, +2 Int, -2 Con', 'Medium'),
-	(4, 'Gnomes', 20, 'Low-Light', '+2 Con, +2 Cha, -2 Str', 'Small'),
-	(5, 'Half-orcs', 30, 'Darkvision', '+2 of your choice', 'Medium'),
-	(6, 'Halflings', 20, 'Normal', '+2 Dex, +2 Cha, -2 Str', 'Small'),
+values (1, 'Half-elf', 30, 'Low-Light', '+2 of your choice', 'Medium'),
+	(2, 'Dwarf', 20, 'Darkvision', '+2 Con, +2 Wis, -2 Cha', 'Medium'),
+	(3, 'Elf', 30, 'Low-Light', '+2 Dex, +2 Int, -2 Con', 'Medium'),
+	(4, 'Gnome', 20, 'Low-Light', '+2 Con, +2 Cha, -2 Str', 'Small'),
+	(5, 'Half-Orc', 30, 'Darkvision', '+2 of your choice', 'Medium'),
+	(6, 'Halfling', 20, 'Normal', '+2 Dex, +2 Cha, -2 Str', 'Small'),
 	(7, 'Human', 30, 'Normal', '+2 of your choice', 'Medium');
 

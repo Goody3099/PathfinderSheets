@@ -34,6 +34,9 @@ namespace PathfinderSheets
         {
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddTransient<ICharacterSheetRepository, CharacterSheetRepository>();
+            services.AddTransient<IAlignmentRepository, AlignmentRepository>();
+            services.AddTransient<IClassRepository, ClassRepository>();
+            services.AddTransient<IRaceRepository, RaceRepository>();
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 

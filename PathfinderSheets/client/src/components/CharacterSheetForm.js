@@ -7,15 +7,39 @@ import { useHistory } from 'react-router-dom';
 
 const CharacterSheetForm = () => {
 
-    const [sheet, setSheet] = useState();
+    const [sheet, setSheet] = useState({});
+    const [alignments, setAlignments] = useState([]);
+    const [classes, setClasses] = useState([]);
+    const [races, setRaces] = useState([]);
 
     const { getToken } = useContext(UserProfileContext);
 
     const history = useHistory();
 
     useEffect(() => {
+        getAlignments();
+        getClasses();
+        getRaces();
+    }, [])
 
-    })
+    
+    const getAlignments = () => {
+        fetch('/api/alignment')
+        .then(res => res.json())
+        .then(res => setAlignments(res))
+    };
+
+    const getClasses = () => {
+        fetch('/api/class')
+        .then(res => res.json())
+        .then(res => setClasses(res))
+    };
+
+    const getRaces = () => {
+        fetch('/api/race')
+        .then(res => res.json())
+        .then(res => setRaces(res))
+    };
 
     const skillArray = ["Acrobatics", "Appraise", "Bluff", "Climb", "Craft", "Diplomacy", "Disable Device", "Escape Artist", "Fly", "Handle Animal", "Heal", "Intimidate",
                         "Knowledge(Arcana)", "Knowledge(Dungeoneering)", "Knowledge(Engineering)", "Knowledge(Geography)", "Knowledge(History)", "Knowledge(Local)", "Knowledge(Nature)",
@@ -33,7 +57,7 @@ const CharacterSheetForm = () => {
     const addNewSheet = (sheet) => {
         getToken()
         .then((token) => {
-            fetch('/api/sheet', {
+            fetch('/api/charactersheet', {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/JSON",
@@ -56,13 +80,20 @@ const CharacterSheetForm = () => {
                      <Col md={4}>
                          <FormGroup>
                              <Label>Character Name</Label>
-                             <Input/>
+                             <Input name="characterName" id="characterName" onChange={((e) => handleChange(e))}/>
                          </FormGroup>
                      </Col>
                      <Col md={4}>
                          <FormGroup>
                              <Label>Alignment</Label>
-                             <Input/>
+                             <Input type="select" name="alignment" onChange={((e) => handleChange(e))}>
+                                 <option>Select an Alignment</option>
+                                 {alignments.map((alignment) => (
+                                     <option value={alignment.id} key={alignment.id}>
+                                         {alignment.alignmentName}
+                                     </option>
+                                 ))}
+                              </Input>                                
                          </FormGroup>
                          </Col>
                          <Col md={4}>
@@ -75,11 +106,39 @@ const CharacterSheetForm = () => {
                  <Row>
                      <Col md={5}>
                          <Label>Class</Label>
-                         <Input name="class" id="class"/>
+                         <Input type="select" name="class" onChange={((e) => handleChange(e))}>
+                                 <option>Select a Class</option>
+                                 {classes.map((classx) => (
+                                     <option value={classx.id} key={classx.id}>
+                                         {classx.className}
+                                     </option>
+                                 ))}
+                              </Input>
                      </Col>
                      <Col md={1}>
                          <Label>Level</Label>
-                         <Input/>
+                         <Input type="select" name="level" onChange={((e) => handleChange(e))} >
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                            <option>13</option>
+                            <option>14</option>
+                            <option>15</option>
+                            <option>16</option>
+                            <option>17</option>
+                            <option>18</option>
+                            <option>19</option>
+                            <option>20</option>
+                            </Input>
                      </Col>
                      <Col md={3}>
                          <Label>Deity</Label>
@@ -87,41 +146,48 @@ const CharacterSheetForm = () => {
                      </Col>
                      <Col md={3}>
                          <Label>Homeland</Label>
-                         <Input name="deity" id="deity" onChange={((e) => handleChange(e))}/>
+                         <Input name="homeland" id="homeland" onChange={((e) => handleChange(e))}/>
                      </Col>
                  </Row>
                  <Row>
                      <Col md={3}>
                          <Label>Race</Label>
-                         <Input/>
+                         <Input type="select" name="race" onChange={((e) => handleChange(e))}>
+                                 <option>Select a Race</option>
+                                 {races.map((race) => (
+                                     <option value={race.id} key={race.id}>
+                                         {race.raceName}
+                                     </option>
+                                 ))}
+                              </Input>  
                      </Col>
                      <Col md={3}>
                          <Label>Size</Label>
-                         <Input name="deity" id="deity" onChange={((e) => handleChange(e))}/>
+                         <Input name="size" id="size" onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={1}>
                          <Label>Gender</Label>
-                         <Input name="deity" id="deity" onChange={((e) => handleChange(e))}/>
+                         <Input name="gender" id="gender" onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={1}>
                          <Label>Age</Label>
-                         <Input name="deity" id="deity" onChange={((e) => handleChange(e))}/>
+                         <Input name="age" id="age" onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={1}>
                          <Label>Height</Label>
-                         <Input name="deity" id="deity" onChange={((e) => handleChange(e))}/>
+                         <Input name="height" id="height" onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={1}>
                          <Label>Weight</Label>
-                         <Input name="deity" id="deity" onChange={((e) => handleChange(e))}/>
+                         <Input name="weight" id="weight" onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={1}>
                          <Label>Hair</Label>
-                         <Input name="deity" id="deity" onChange={((e) => handleChange(e))}/>
+                         <Input name="hair" id="hair" onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={1}>
                          <Label>Eyes</Label>
-                         <Input name="deity" id="deity" onChange={((e) => handleChange(e))}/>
+                         <Input name="eyes" id="eyes" onChange={((e) => handleChange(e))}/>
                      </Col>
                  </Row>
             </Col>
@@ -246,7 +312,7 @@ const CharacterSheetForm = () => {
                         <Row>
                             <Col md={{size:10, offset:1}}>
                                 <h1>Inventory</h1>
-                                <Input rows="10" type="textarea" onChange={((e) => handleChange(e))}/>
+                                <Input rows="10" type="textarea" name="inventory" id="inventory" onChange={((e) => handleChange(e))}/>
                             </Col>
                         </Row>
                 </Col>
