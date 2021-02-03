@@ -1,9 +1,11 @@
-﻿
+﻿set identity_insert [Alignment] on
 insert into [Alignment] ([Id], [AlignmentName]) 
 values (1, 'Lawful Good'), (2, 'Neutral Good'), (3, 'Chaotic Good'), 
 	   (4, 'Lawful Neutral'), (5, 'Neutral'), (6, 'Chaotic Neutral'), 
 	   (7, 'Lawful Evil'), (8, 'Neutral Evil'), (9, 'Chaotic Evil');
+set identity_insert [Alignment] off
 
+set identity_insert [Class] on
 insert into [Class] ([Id], [ClassName], [CharacterLevel], [BaB], [Fort], [Reflex],[Will], [HitDie], [SkillPoints])
 values (1, 'Barbarian', 1, 1, 2, 0, 0, 12, 4),
 	(2, 'Barbarian', 2, 2, 3, 0, 0, 12, 4),
@@ -225,7 +227,9 @@ values (1, 'Barbarian', 1, 1, 2, 0, 0, 12, 4),
 	(218, 'Wizard', 18, 9, 6, 6, 11, 6, 2),
 	(219, 'Wizard', 19, 9, 6, 6, 11, 6, 2),
 	(220, 'Wizard', 20, 10, 6, 6, 12, 6, 2);
+set identity_insert [Class] off
 
+set identity_insert [Race] on
 insert into [Race] ([Id], [RaceName], [MovementSpeed], [Vision], [BonusAttributes], [Size])
 values (1, 'Half-elf', 30, 'Low-Light', '+2 of your choice', 'Medium'),
 	(2, 'Dwarf', 20, 'Darkvision', '+2 Con, +2 Wis, -2 Cha', 'Medium'),
@@ -234,4 +238,4 @@ values (1, 'Half-elf', 30, 'Low-Light', '+2 of your choice', 'Medium'),
 	(5, 'Half-Orc', 30, 'Darkvision', '+2 of your choice', 'Medium'),
 	(6, 'Halfling', 20, 'Normal', '+2 Dex, +2 Cha, -2 Str', 'Small'),
 	(7, 'Human', 30, 'Normal', '+2 of your choice', 'Medium');
-
+set identity_insert [Race] off

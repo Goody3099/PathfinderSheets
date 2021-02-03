@@ -8,11 +8,15 @@ import { useHistory } from 'react-router-dom';
 const CharacterSheetForm = () => {
 
     const [sheet, setSheet] = useState({});
+    console.log(sheet)
+
     const [alignments, setAlignments] = useState([]);
     const [classes, setClasses] = useState([]);
     const [races, setRaces] = useState([]);
 
-    const { getToken } = useContext(UserProfileContext);
+    const { getToken, getCurrentUser } = useContext(UserProfileContext);
+
+    const user = getCurrentUser();
 
     const history = useHistory();
 
@@ -46,13 +50,12 @@ const CharacterSheetForm = () => {
                         "Knowledge(Nobility)", "Knowledge(Planes)", "Knowledge(Religion)", "Linguistics", "Perception", "Perform", "Profession", "Ride", "Sense Motive", "Sleight of Hand",
                         "Spellcraft", "Stealth", "Survival", "Swim", "Use Magic Device"];
 
-    const attributeArray = ["Strenght", "Dexterity", "Consitution", "Intelligence", "Wisdom", "Charisma"]
+    const attributeArray = ["Strength", "Dexterity", "Consitution", "Intelligence", "Wisdom", "Charisma"]
 
     const handleChange = (e) => {
         const newSheet = {...sheet};
         newSheet[e.target.name] = e.target.value;
         setSheet(newSheet);
-        console.log(newSheet);
     }
 
     const addNewSheet = (sheet) => {
@@ -87,7 +90,7 @@ const CharacterSheetForm = () => {
                      <Col md={4}>
                          <FormGroup>
                              <Label>Alignment</Label>
-                             <Input type="select" name="alignment" onChange={((e) => handleChange(e))}>
+                             <Input type="select" name="alignmentId" onChange={((e) => handleChange(e))}>
                                  <option>Select an Alignment</option>
                                  {alignments.map((alignment) => (
                                      <option value={alignment.id} key={alignment.id}>
@@ -100,14 +103,14 @@ const CharacterSheetForm = () => {
                          <Col md={4}>
                          <FormGroup>
                              <Label>Player Name</Label>
-                             <Input readOnly value/>
+                             <Input readOnly value={user.displayName}/>
                          </FormGroup>
                          </Col>
                  </Row>
                  <Row>
                      <Col md={5}>
                          <Label>Class</Label>
-                         <Input type="select" name="class" onChange={((e) => handleChange(e))}>
+                         <Input type="select" name="classId" onChange={((e) => handleChange(e))}>
                                  <option>Select a Class</option>
                                  {classes.map((classx) => (
                                      <option value={classx.id} key={classx.id}>
@@ -153,7 +156,7 @@ const CharacterSheetForm = () => {
                  <Row>
                      <Col md={3}>
                          <Label>Race</Label>
-                         <Input type="select" name="race" onChange={((e) => handleChange(e))}>
+                         <Input type="select" name="raceId" onChange={((e) => handleChange(e))}>
                                  <option>Select a Race</option>
                                  {races.map((race) => (
                                      <option value={race.id} key={race.id}>
@@ -197,7 +200,7 @@ const CharacterSheetForm = () => {
             <Row>
                 <Col md={6}>
                         <h1>Attributes</h1>
-                            {attributeArray.map(attribute => <Attributes key={attribute} attribute={attribute} handleChange={handleChange} />)}
+                            {attributeArray.map(attribute => <Attributes key={attribute} attribute={attribute} handleChange={handleChange} sheet={sheet} />)}
                             <h1>Health</h1>
                     <Row>
                         <Col md={{size:2,offset:4}}>
@@ -324,11 +327,11 @@ const CharacterSheetForm = () => {
                         <Row>
                         <Col md={{size:2, offset:4}}>
                             <Label>Skill Points Used</Label>
-                            <Input name="SPU" id="SPU" onChange={((e) => handleChange(e))}/>
+                            <Input readOnly value />
                         </Col>
                         <Col md={2}>
                             <Label>Total Skill Points</Label>
-                            <Input name="TSP" id="TSP" onChange={((e) => handleChange(e))}/>
+                            <Input readOnly value />
                         </Col>
                         </Row>
                         <br></br>

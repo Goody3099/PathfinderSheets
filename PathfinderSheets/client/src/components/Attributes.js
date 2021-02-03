@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Col, Input, Label, Row } from 'reactstrap';
 
-const Attributes = ({attribute, handleChange}) => {
+const Attributes = ({attribute, handleChange, sheet}) => {
 
     return (
         <>
@@ -12,10 +12,10 @@ const Attributes = ({attribute, handleChange}) => {
                         <Input name={`${attribute}`} id={`${attribute}`} onChange={((e) => handleChange(e))}/>
                     </Col> Mod
                     <Col md={2}>
-                        <Input readOnly value />
+                        <Input readOnly value={Math.floor((sheet[attribute] - 10) / 2)} />
                     </Col> Temp
                     <Col md={2}>
-                        <Input name={`${attribute}Mod`} id={`${attribute}Mod`} onChange={((e) => handleChange(e))}/>
+                        <Input name={`${attribute}Temp`} id={`${attribute}Temp`} onChange={((e) => handleChange(e))}/>
                     </Col>
                 </Row>
             </Col>
