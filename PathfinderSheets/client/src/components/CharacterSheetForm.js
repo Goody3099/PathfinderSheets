@@ -52,6 +52,7 @@ const CharacterSheetForm = () => {
         const newSheet = {...sheet};
         newSheet[e.target.name] = e.target.value;
         setSheet(newSheet);
+        console.log(newSheet);
     }
 
     const addNewSheet = (sheet) => {
@@ -196,7 +197,7 @@ const CharacterSheetForm = () => {
             <Row>
                 <Col md={6}>
                         <h1>Attributes</h1>
-                            {attributeArray.map(attribute => <Attributes key={attribute} attribute={attribute} />)}
+                            {attributeArray.map(attribute => <Attributes key={attribute} attribute={attribute} handleChange={handleChange} />)}
                             <h1>Health</h1>
                     <Row>
                         <Col md={{size:2,offset:4}}>
@@ -318,7 +319,7 @@ const CharacterSheetForm = () => {
                 </Col>
                     <Col md={6}>
                         <h1>Skills</h1>
-                            {skillArray.map(skill => <Skills key={skill} skill={skill} />)}
+                            {skillArray.map(skill => <Skills key={skill} skill={skill} handleChange={handleChange} />)}
                             <br></br>
                         <Row>
                         <Col md={{size:2, offset:4}}>
