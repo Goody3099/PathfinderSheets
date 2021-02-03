@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from 'react';
-import { Col, Form, FormGroup, Input, Label, Row } from 'reactstrap';
+import React, { useContext, useEffect, useState } from 'react';
+import { Col, Form, FormGroup, Input, Label, Row, Button } from 'reactstrap';
 import Attributes from './Attributes';
 import Skills from './Skills';
+import { UserProfileContext } from "../providers/UserProfileProvider";
+import { useHistory } from 'react-router-dom';
 
 const CharacterSheetForm = () => {
 
     const [sheet, setSheet] = useState();
+
+    const { getToken } = useContext(UserProfileContext);
+
+    const history = useHistory();
 
     useEffect(() => {
 
@@ -23,6 +29,21 @@ const CharacterSheetForm = () => {
         newSheet[e.target.name] = e.target.value;
         setSheet(newSheet);
     }
+
+    const addNewSheet = (sheet) => {
+        getToken()
+        .then((token) => {
+            fetch('/api/sheet', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/JSON",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(sheet)
+            })
+        })
+        .then(() => history.push('/'))
+    };
 
     return (
         <Form>
@@ -54,7 +75,7 @@ const CharacterSheetForm = () => {
                  <Row>
                      <Col md={5}>
                          <Label>Class</Label>
-                         <Input/>
+                         <Input name="class" id="class"/>
                      </Col>
                      <Col md={1}>
                          <Label>Level</Label>
@@ -62,11 +83,11 @@ const CharacterSheetForm = () => {
                      </Col>
                      <Col md={3}>
                          <Label>Deity</Label>
-                         <Input/>
+                         <Input name="deity" id="deity" onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={3}>
                          <Label>Homeland</Label>
-                         <Input/>
+                         <Input name="deity" id="deity" onChange={((e) => handleChange(e))}/>
                      </Col>
                  </Row>
                  <Row>
@@ -76,31 +97,31 @@ const CharacterSheetForm = () => {
                      </Col>
                      <Col md={3}>
                          <Label>Size</Label>
-                         <Input/>
+                         <Input name="deity" id="deity" onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={1}>
                          <Label>Gender</Label>
-                         <Input/>
+                         <Input name="deity" id="deity" onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={1}>
                          <Label>Age</Label>
-                         <Input/>
+                         <Input name="deity" id="deity" onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={1}>
                          <Label>Height</Label>
-                         <Input/>
+                         <Input name="deity" id="deity" onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={1}>
                          <Label>Weight</Label>
-                         <Input/>
+                         <Input name="deity" id="deity" onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={1}>
                          <Label>Hair</Label>
-                         <Input/>
+                         <Input name="deity" id="deity" onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={1}>
                          <Label>Eyes</Label>
-                         <Input/>
+                         <Input name="deity" id="deity" onChange={((e) => handleChange(e))}/>
                      </Col>
                  </Row>
             </Col>
@@ -114,11 +135,11 @@ const CharacterSheetForm = () => {
                     <Row>
                         <Col md={{size:2,offset:4}}>
                         <Label>Current</Label>
-                        <Input name="currentHealth" id="currentHealth" />
+                        <Input name="currentHealth" id="currentHealth" onChange={((e) => handleChange(e))}/>
                         </Col>
                         <Col md={2}>
                         <Label>Maximum</Label>
-                        <Input name="maxHealth" id="maxHealth" />
+                        <Input name="maxHealth" id="maxHealth" onChange={((e) => handleChange(e))}/>
                         </Col>
                     </Row>
                     <br></br>
@@ -126,15 +147,15 @@ const CharacterSheetForm = () => {
                         <Row>
                             <Col md={{size:2, offset:3}}>
                                 <Label>Fortitude</Label>
-                                <Input name="fortitude" id="fortitude" />
+                                <Input name="fortitude" id="fortitude" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Reflex</Label>
-                                <Input name="reflex" id="reflex" />
+                                <Input name="reflex" id="reflex" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Will</Label>
-                                <Input name="will" id="will" />
+                                <Input name="will" id="will" onChange={((e) => handleChange(e))}/>
                             </Col>
                         </Row>                        
                     <br></br>
@@ -142,23 +163,23 @@ const CharacterSheetForm = () => {
                         <Row>
                             <Col md={{size:2, offset:1}}>
                                 <Label>Armor Class</Label>
-                                <Input name="armorClass" id="armorClass" />
+                                <Input name="armorClass" id="armorClass" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Touch AC</Label>
-                                <Input name="touchAC" id="touchAC" />
+                                <Input name="touchAC" id="touchAC" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Flat-Footed AC</Label>
-                                <Input name="fFAC" id="fFAC" />
+                                <Input name="fFAC" id="fFAC" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Spell Resistance</Label>
-                                <Input name="spellResistance" id="spellResistance" />
+                                <Input name="spellResistance" id="spellResistance" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>CMD</Label>
-                                <Input name="CMD" id="CMD" />
+                                <Input name="CMD" id="CMD" onChange={((e) => handleChange(e))}/>
                             </Col>
                         </Row>
                         <br></br>
@@ -166,23 +187,23 @@ const CharacterSheetForm = () => {
                         <Row>
                             <Col md={{size:2, offset:1}}>
                                 <Label>Inititiative</Label>
-                                <Input name="inititiative" id="initiative" />
+                                <Input name="inititiative" id="initiative" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Basic Attack Bonus</Label>
-                                <Input name="BaB" id="BaB" />
+                                <Input name="BaB" id="BaB" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Melee</Label>
-                                <Input name="melee" id="melee" />
+                                <Input name="melee" id="melee" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Ranged</Label>
-                                <Input name="ranged" id="ranged" />
+                                <Input name="ranged" id="ranged" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>CMB</Label>
-                                <Input name="CMB" id="CMB" />
+                                <Input name="CMB" id="CMB" onChange={((e) => handleChange(e))}/>
                             </Col>
                         </Row>
                         <br></br>
@@ -190,23 +211,23 @@ const CharacterSheetForm = () => {
                         <Row>
                             <Col md={{size:2, offset:1}}>
                                 <Label>Land</Label>
-                                <Input name="land" id="land" />
+                                <Input name="land" id="land" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Run</Label>
-                                <Input name="Run" id="Run" />
+                                <Input name="Run" id="Run" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Climb</Label>
-                                <Input name="climb" id="climb" />
+                                <Input name="climb" id="climb" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Swim</Label>
-                                <Input name="swim" id="swim" />
+                                <Input name="swim" id="swim" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Fly</Label>
-                                <Input name="fly" id="fly" />
+                                <Input name="fly" id="fly" onChange={((e) => handleChange(e))}/>
                             </Col>
                         </Row>
                         <br></br>
@@ -214,26 +235,43 @@ const CharacterSheetForm = () => {
                         <Row>
                         <Col md={{size:5, offset:1}}>
                             <Label>Weapons</Label>
-                            <Input rows="5" type="textarea" name="weapons" id="weapons" />
+                            <Input rows="5" type="textarea" name="weapons" id="weapons" onChange={((e) => handleChange(e))}/>
                         </Col>
                         <Col md={5}>
                             <Label>Armor</Label>
-                            <Input rows="5" type="textarea" name="armor" id="armor" />
+                            <Input rows="5" type="textarea" name="armor" id="armor" onChange={((e) => handleChange(e))}/>
                         </Col>
                         </Row>
                         <br></br>
                         <Row>
                             <Col md={{size:10, offset:1}}>
                                 <h1>Inventory</h1>
-                                <Input rows="10" type="textarea" />
+                                <Input rows="10" type="textarea" onChange={((e) => handleChange(e))}/>
                             </Col>
                         </Row>
                 </Col>
                     <Col md={6}>
                         <h1>Skills</h1>
                             {skillArray.map(skill => <Skills key={skill} skill={skill} />)}
-                </Col>
-            </Row>          
+                            <br></br>
+                        <Row>
+                        <Col md={{size:2, offset:4}}>
+                            <Label>Skill Points Used</Label>
+                            <Input name="SPU" id="SPU" onChange={((e) => handleChange(e))}/>
+                        </Col>
+                        <Col md={2}>
+                            <Label>Total Skill Points</Label>
+                            <Input name="TSP" id="TSP" onChange={((e) => handleChange(e))}/>
+                        </Col>
+                        </Row>
+                        <br></br>
+                    </Col>
+                   
+            </Row> 
+            <Button color="info" onClick={e => {
+                e.preventDefault()
+                addNewSheet(sheet)
+            }}>Save Character</Button>         
         </Form>
     )
 }
