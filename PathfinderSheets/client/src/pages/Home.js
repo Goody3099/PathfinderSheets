@@ -1,15 +1,24 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import CharacterSheetList from "../components/CharacterSheetList";
+import { UserProfileContext } from "../providers/UserProfileProvider";
 
 const Home = () => {
     const [sheets, setSheets] = useState([]);
+    const { getToken } = useContext(UserProfileContext);
 
     useEffect(() => {
-        fetch("/api/charactersheet")
+      getToken()
+      .then((token) =>
+        fetch("/api/charactersheet", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${token}`
+          },
+        })
         .then((res) => res.json())
         .then((sheets) => {
             setSheets(sheets);
-        });
+        }));
     }, []);
 
     return (
