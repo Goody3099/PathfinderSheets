@@ -322,7 +322,7 @@ const CharacterSheetDetails = () => {
                 </Col>
                     <Col md={6}>
                         <h1>Skills</h1>
-                            {skillArray.map(skill => <Skills key={skill} skill={skill} handleChange={handleChange} />)}
+                            {skillArray.map(skill => <Skills key={skill} skill={skill} sheet={sheet} handleChange={handleChange} />)}
                             <br></br>
                         <Row>
                         <Col md={{size:2, offset:4}}>

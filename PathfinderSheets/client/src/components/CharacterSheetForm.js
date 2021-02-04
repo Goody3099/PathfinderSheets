@@ -45,7 +45,7 @@ const CharacterSheetForm = () => {
 
     const skillArray = ["Acrobatics", "Appraise", "Bluff", "Climb", "Craft", "Diplomacy", "Disable Device", "Escape Artist", "Fly", "Handle Animal", "Heal", "Intimidate",
                         "Knowledge(Arcana)", "Knowledge(Dungeoneering)", "Knowledge(Engineering)", "Knowledge(Geography)", "Knowledge(History)", "Knowledge(Local)", "Knowledge(Nature)",
-                        "Knowledge(Nobility)", "Knowledge(Planes)", "Knowledge(Religion)", "Linguistics", "Perception", "Perform", "Profession", "Ride", "Sense Motive", "Sleight of Hand",
+                        "Knowledge(Nobility)", "Knowledge(Planes)", "Knowledge(Religion)", "Linguistics", "Perception", "Perform", "Profession", "Ride", "Sense Motive", "Sleight Of Hand",
                         "Spellcraft", "Stealth", "Survival", "Swim", "Use Magic Device"];
 
     const attributeArray = ["Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"]
@@ -320,7 +320,7 @@ const CharacterSheetForm = () => {
                 </Col>
                     <Col md={6}>
                         <h1>Skills</h1>
-                            {skillArray.map(skill => <Skills key={skill} skill={skill} handleChange={handleChange} />)}
+                            {skillArray.map(skill => <Skills key={skill} skill={skill} sheet={sheet} handleChange={handleChange} />)}
                             <br></br>
                         <Row>
                         <Col md={{size:2, offset:4}}>

@@ -89,6 +89,7 @@ CREATE TABLE [CharacterSheet] (
   [Melee] integer,
   [NextLevelEXP] integer,
   [Perception] integer,
+  [Perform] integer,
   [Platnium] integer,
   [Profession] integer,
   [RaceId] integer,
