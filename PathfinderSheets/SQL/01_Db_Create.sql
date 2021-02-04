@@ -15,7 +15,7 @@ DROP TABLE IF EXISTS [UserProfile];
 GO
 
 CREATE TABLE [UserProfile] (
-  [Id] integer PRIMARY KEY,
+  [Id] integer PRIMARY KEY IDENTITY,
   [FirebaseUserId] NVARCHAR(28) NOT NULL,
   [DisplayName] nvarchar(50) NOT NULL,
   [FirstName] nvarchar(50) NOT NULL,
@@ -27,9 +27,9 @@ CREATE TABLE [UserProfile] (
 GO
 
 CREATE TABLE [CharacterSheet] (
-  [Id] integer PRIMARY KEY,
+  [Id] integer PRIMARY KEY IDENTITY,
   [UserProfileId] integer,
-  [ChracterName] nvarchar(255),
+  [CharacterName] nvarchar(255),
   [CharacterPicture] nvarchar(255),
   [AlignmentId] integer,
   [CharacterLevel] integer,
@@ -37,8 +37,8 @@ CREATE TABLE [CharacterSheet] (
   [RaceId] integer,
   [Gender] nvarchar(255),
   [Age] integer,
-  [Height] integer,
-  [Weight] integer,
+  [Height] nvarchar(255),
+  [Weight] nvarchar(255),
   [Hair] nvarchar(255),
   [Eyes] nvarchar(255),
   [Strength] integer,
@@ -96,7 +96,7 @@ CREATE TABLE [CharacterSheet] (
   [Survival] integer,
   [Swim] integer,
   [UseMagicDevice] integer,
-  [TotalSkillPoinst] integer,
+  [TotalSkillPoints] integer,
   [Spells] nvarchar(225),
   [LandSpeed] integer,
   [SwimSpeed] integer,
@@ -106,13 +106,13 @@ CREATE TABLE [CharacterSheet] (
 GO
 
 CREATE TABLE [Alignment] (
-  [Id] integer PRIMARY KEY,
+  [Id] integer PRIMARY KEY IDENTITY,
   [AlignmentName] nvarchar(255)
 )
 GO
 
 CREATE TABLE [Class] (
-  [Id] integer PRIMARY KEY,
+  [Id] integer PRIMARY KEY IDENTITY,
   [ClassName] nvarchar(255),
   [CharacterLevel] integer,
   [BaB] integer,
@@ -125,7 +125,7 @@ CREATE TABLE [Class] (
 GO
 
 CREATE TABLE [Race] (
-  [Id] integer PRIMARY KEY,
+  [Id] integer PRIMARY KEY IDENTITY,
   [RaceName] nvarchar(255),
   [MovementSpeed] integer,
   [Vision] nvarchar(225),

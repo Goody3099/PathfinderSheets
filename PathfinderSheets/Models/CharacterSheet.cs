@@ -9,7 +9,7 @@ namespace PathfinderSheets.Models
     {
         public int Id { get; set; }
         public int UserProfileId { get; set; }
-        public UserProfile Users { get; set; }
+        public UserProfile UserProfile { get; set; }
         public string CharacterName { get; set; }
         public string CharacterPicture { get; set; }
         public int AlignmentId { get; set; }
@@ -21,8 +21,8 @@ namespace PathfinderSheets.Models
         public Race Race { get; set; }
         public string Gender { get; set; }
         public int Age { get; set; }
-        public int Height { get; set; }
-        public int Weight { get; set; }
+        public string Height { get; set; }
+        public string Weight { get; set; }
         public string Hair { get; set; }
         public string Eyes { get; set; }
         public int Strength { get; set; }

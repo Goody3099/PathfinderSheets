@@ -9,7 +9,7 @@ namespace PathfinderSheets.Models
     {
         public int Id { get; set; }
         public string ClassName { get; set; }
-        public int Level { get; set; }
+        public int CharacterLevel { get; set; }
         public int BaB { get; set; }
         public int Reflex { get; set; }
         public int Will { get; set; }

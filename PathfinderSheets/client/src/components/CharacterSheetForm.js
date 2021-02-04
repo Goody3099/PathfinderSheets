@@ -1,28 +1,77 @@
-import React, { useEffect, useState } from 'react';
-import { Col, Form, FormGroup, Input, Label, Row } from 'reactstrap';
+import React, { useContext, useEffect, useState } from 'react';
+import { Col, Form, FormGroup, Input, Label, Row, Button } from 'reactstrap';
 import Attributes from './Attributes';
 import Skills from './Skills';
+import { UserProfileContext } from "../providers/UserProfileProvider";
+import { useHistory } from 'react-router-dom';
 
 const CharacterSheetForm = () => {
 
-    const [sheet, setSheet] = useState();
+    const [sheet, setSheet] = useState({});
+    console.log(sheet)
+
+    const [alignments, setAlignments] = useState([]);
+    const [classes, setClasses] = useState([]);
+    const [races, setRaces] = useState([]);
+
+    const { getToken, getCurrentUser } = useContext(UserProfileContext);
+
+    const user = getCurrentUser();
+
+    const history = useHistory();
 
     useEffect(() => {
+        getAlignments();
+        getClasses();
+        getRaces();
+    }, [])
 
-    })
+    
+    const getAlignments = () => {
+        fetch('/api/alignment')
+        .then(res => res.json())
+        .then(res => setAlignments(res))
+    };
+
+    const getClasses = () => {
+        fetch('/api/class')
+        .then(res => res.json())
+        .then(res => setClasses(res))
+    };
+
+    const getRaces = () => {
+        fetch('/api/race')
+        .then(res => res.json())
+        .then(res => setRaces(res))
+    };
 
     const skillArray = ["Acrobatics", "Appraise", "Bluff", "Climb", "Craft", "Diplomacy", "Disable Device", "Escape Artist", "Fly", "Handle Animal", "Heal", "Intimidate",
                         "Knowledge(Arcana)", "Knowledge(Dungeoneering)", "Knowledge(Engineering)", "Knowledge(Geography)", "Knowledge(History)", "Knowledge(Local)", "Knowledge(Nature)",
                         "Knowledge(Nobility)", "Knowledge(Planes)", "Knowledge(Religion)", "Linguistics", "Perception", "Perform", "Profession", "Ride", "Sense Motive", "Sleight of Hand",
                         "Spellcraft", "Stealth", "Survival", "Swim", "Use Magic Device"];
 
-    const attributeArray = ["Strenght", "Dexterity", "Consitution", "Intelligence", "Wisdom", "Charisma"]
+    const attributeArray = ["Strength", "Dexterity", "Consitution", "Intelligence", "Wisdom", "Charisma"]
 
     const handleChange = (e) => {
         const newSheet = {...sheet};
         newSheet[e.target.name] = e.target.value;
         setSheet(newSheet);
     }
+
+    const addNewSheet = (sheet) => {
+        getToken()
+        .then((token) => {
+            fetch('/api/charactersheet', {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/JSON",
+                    Authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(sheet)
+            })
+        })
+        .then(() => history.push('/'))
+    };
 
     return (
         <Form>
@@ -35,72 +84,114 @@ const CharacterSheetForm = () => {
                      <Col md={4}>
                          <FormGroup>
                              <Label>Character Name</Label>
-                             <Input/>
+                             <Input name="characterName" id="characterName" onChange={((e) => handleChange(e))}/>
                          </FormGroup>
                      </Col>
                      <Col md={4}>
                          <FormGroup>
                              <Label>Alignment</Label>
-                             <Input/>
+                             <Input type="select" name="alignmentId" onChange={((e) => handleChange(e))}>
+                                 <option>Select an Alignment</option>
+                                 {alignments.map((alignment) => (
+                                     <option value={alignment.id} key={alignment.id}>
+                                         {alignment.alignmentName}
+                                     </option>
+                                 ))}
+                              </Input>                                
                          </FormGroup>
                          </Col>
                          <Col md={4}>
                          <FormGroup>
                              <Label>Player Name</Label>
-                             <Input readOnly value/>
+                             <Input readOnly value={user.displayName}/>
                          </FormGroup>
                          </Col>
                  </Row>
                  <Row>
                      <Col md={5}>
                          <Label>Class</Label>
-                         <Input/>
+                         <Input type="select" name="classId" onChange={((e) => handleChange(e))}>
+                                 <option>Select a Class</option>
+                                 {classes.map((classx) => (
+                                     <option value={classx.id} key={classx.id}>
+                                         {classx.className}
+                                     </option>
+                                 ))}
+                              </Input>
                      </Col>
                      <Col md={1}>
                          <Label>Level</Label>
-                         <Input/>
+                         <Input type="select" name="level" onChange={((e) => handleChange(e))} >
+                            <option>1</option>
+                            <option>2</option>
+                            <option>3</option>
+                            <option>4</option>
+                            <option>5</option>
+                            <option>6</option>
+                            <option>7</option>
+                            <option>8</option>
+                            <option>9</option>
+                            <option>10</option>
+                            <option>11</option>
+                            <option>12</option>
+                            <option>13</option>
+                            <option>14</option>
+                            <option>15</option>
+                            <option>16</option>
+                            <option>17</option>
+                            <option>18</option>
+                            <option>19</option>
+                            <option>20</option>
+                            </Input>
                      </Col>
                      <Col md={3}>
                          <Label>Deity</Label>
-                         <Input/>
+                         <Input name="deity" id="deity" onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={3}>
                          <Label>Homeland</Label>
-                         <Input/>
+                         <Input name="homeland" id="homeland" onChange={((e) => handleChange(e))}/>
                      </Col>
                  </Row>
                  <Row>
                      <Col md={3}>
                          <Label>Race</Label>
-                         <Input/>
+                         <Input type="select" name="raceId" onChange={((e) => handleChange(e))}>
+                                 <option>Select a Race</option>
+                                 {races.map((race) => (
+                                     <option value={race.id} key={race.id}>
+                                         {race.raceName}
+                                     </option>
+                                 ))}
+                              </Input>  
                      </Col>
                      <Col md={3}>
                          <Label>Size</Label>
-                         <Input/>
+                         <Input name="size" id="size" onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={1}>
                          <Label>Gender</Label>
-                         <Input/>
+                         <Input name="gender" id="gender" onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={1}>
                          <Label>Age</Label>
-                         <Input/>
+                         <Input name="age" id="age" onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={1}>
                          <Label>Height</Label>
-                         <Input/>
+                         <Input name="height" id="height" onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={1}>
                          <Label>Weight</Label>
-                         <Input/>
+                         <Input name="weight" id="weight" onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={1}>
                          <Label>Hair</Label>
-                         <Input/>
+                         <Input name="hair" id="hair" onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={1}>
                          <Label>Eyes</Label>
-                         <Input/>
+                         <Input name="eyes" id="eyes" onChange={((e) => handleChange(e))}/>
                      </Col>
                  </Row>
             </Col>
@@ -109,16 +200,16 @@ const CharacterSheetForm = () => {
             <Row>
                 <Col md={6}>
                         <h1>Attributes</h1>
-                            {attributeArray.map(attribute => <Attributes key={attribute} attribute={attribute} />)}
+                            {attributeArray.map(attribute => <Attributes key={attribute} attribute={attribute} handleChange={handleChange} sheet={sheet} />)}
                             <h1>Health</h1>
                     <Row>
                         <Col md={{size:2,offset:4}}>
                         <Label>Current</Label>
-                        <Input name="currentHealth" id="currentHealth" />
+                        <Input name="currentHealth" id="currentHealth" onChange={((e) => handleChange(e))}/>
                         </Col>
                         <Col md={2}>
                         <Label>Maximum</Label>
-                        <Input name="maxHealth" id="maxHealth" />
+                        <Input name="maxHealth" id="maxHealth" onChange={((e) => handleChange(e))}/>
                         </Col>
                     </Row>
                     <br></br>
@@ -126,15 +217,15 @@ const CharacterSheetForm = () => {
                         <Row>
                             <Col md={{size:2, offset:3}}>
                                 <Label>Fortitude</Label>
-                                <Input name="fortitude" id="fortitude" />
+                                <Input name="fortitude" id="fortitude" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Reflex</Label>
-                                <Input name="reflex" id="reflex" />
+                                <Input name="reflex" id="reflex" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Will</Label>
-                                <Input name="will" id="will" />
+                                <Input name="will" id="will" onChange={((e) => handleChange(e))}/>
                             </Col>
                         </Row>                        
                     <br></br>
@@ -142,23 +233,23 @@ const CharacterSheetForm = () => {
                         <Row>
                             <Col md={{size:2, offset:1}}>
                                 <Label>Armor Class</Label>
-                                <Input name="armorClass" id="armorClass" />
+                                <Input name="armorClass" id="armorClass" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Touch AC</Label>
-                                <Input name="touchAC" id="touchAC" />
+                                <Input name="touchAC" id="touchAC" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Flat-Footed AC</Label>
-                                <Input name="fFAC" id="fFAC" />
+                                <Input name="fFAC" id="fFAC" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Spell Resistance</Label>
-                                <Input name="spellResistance" id="spellResistance" />
+                                <Input name="spellResistance" id="spellResistance" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>CMD</Label>
-                                <Input name="CMD" id="CMD" />
+                                <Input name="CMD" id="CMD" onChange={((e) => handleChange(e))}/>
                             </Col>
                         </Row>
                         <br></br>
@@ -166,23 +257,23 @@ const CharacterSheetForm = () => {
                         <Row>
                             <Col md={{size:2, offset:1}}>
                                 <Label>Inititiative</Label>
-                                <Input name="inititiative" id="initiative" />
+                                <Input name="inititiative" id="initiative" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Basic Attack Bonus</Label>
-                                <Input name="BaB" id="BaB" />
+                                <Input name="BaB" id="BaB" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Melee</Label>
-                                <Input name="melee" id="melee" />
+                                <Input name="melee" id="melee" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Ranged</Label>
-                                <Input name="ranged" id="ranged" />
+                                <Input name="ranged" id="ranged" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>CMB</Label>
-                                <Input name="CMB" id="CMB" />
+                                <Input name="CMB" id="CMB" onChange={((e) => handleChange(e))}/>
                             </Col>
                         </Row>
                         <br></br>
@@ -190,23 +281,23 @@ const CharacterSheetForm = () => {
                         <Row>
                             <Col md={{size:2, offset:1}}>
                                 <Label>Land</Label>
-                                <Input name="land" id="land" />
+                                <Input name="land" id="land" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Run</Label>
-                                <Input name="Run" id="Run" />
+                                <Input name="Run" id="Run" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Climb</Label>
-                                <Input name="climb" id="climb" />
+                                <Input name="climb" id="climb" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Swim</Label>
-                                <Input name="swim" id="swim" />
+                                <Input name="swim" id="swim" onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Fly</Label>
-                                <Input name="fly" id="fly" />
+                                <Input name="fly" id="fly" onChange={((e) => handleChange(e))}/>
                             </Col>
                         </Row>
                         <br></br>
@@ -214,26 +305,43 @@ const CharacterSheetForm = () => {
                         <Row>
                         <Col md={{size:5, offset:1}}>
                             <Label>Weapons</Label>
-                            <Input rows="5" type="textarea" name="weapons" id="weapons" />
+                            <Input rows="5" type="textarea" name="weapon" id="weapons" onChange={((e) => handleChange(e))}/>
                         </Col>
                         <Col md={5}>
                             <Label>Armor</Label>
-                            <Input rows="5" type="textarea" name="armor" id="armor" />
+                            <Input rows="5" type="textarea" name="armor" id="armor" onChange={((e) => handleChange(e))}/>
                         </Col>
                         </Row>
                         <br></br>
                         <Row>
                             <Col md={{size:10, offset:1}}>
                                 <h1>Inventory</h1>
-                                <Input rows="10" type="textarea" />
+                                <Input rows="10" type="textarea" name="inventory" id="inventory" onChange={((e) => handleChange(e))}/>
                             </Col>
                         </Row>
                 </Col>
                     <Col md={6}>
                         <h1>Skills</h1>
-                            {skillArray.map(skill => <Skills key={skill} skill={skill} />)}
-                </Col>
-            </Row>          
+                            {skillArray.map(skill => <Skills key={skill} skill={skill} handleChange={handleChange} />)}
+                            <br></br>
+                        <Row>
+                        <Col md={{size:2, offset:4}}>
+                            <Label>Skill Points Used</Label>
+                            <Input readOnly value />
+                        </Col>
+                        <Col md={2}>
+                            <Label>Total Skill Points</Label>
+                            <Input readOnly value />
+                        </Col>
+                        </Row>
+                        <br></br>
+                    </Col>
+                   
+            </Row> 
+            <Button color="info" onClick={e => {
+                e.preventDefault()
+                addNewSheet(sheet)
+            }}>Save Character</Button>         
         </Form>
     )
 }

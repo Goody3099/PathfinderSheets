@@ -50,6 +50,7 @@ namespace PathfinderSheets.Controllers
         public IActionResult Post(CharacterSheet sheet)
         {
             var currentUser = GetCurrentUserProfile();
+            sheet.UserProfileId = currentUser.Id;
             _characterSheetRepo.Add(sheet);
             return Ok(sheet);
         }
