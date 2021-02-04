@@ -1,28 +1,24 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Col, Form, FormGroup, Input, Label, Row, Button } from 'reactstrap';
-import Attributes from './Attributes';
-import Skills from './Skills';
+import React, { useContext, useEffect, useState } from "react";
+import { useHistory, useParams } from "react-router-dom";
+import { Col, Form, FormGroup, Input, Label, Row } from 'reactstrap';
+import Attributes from "../components/Attributes";
+import Skills from "../components/Skills";
 import { UserProfileContext } from "../providers/UserProfileProvider";
-import { useHistory } from 'react-router-dom';
 
-const CharacterSheetForm = () => {
+const CharacterSheetDetails = () => {
 
     const [sheet, setSheet] = useState({});
     const [alignments, setAlignments] = useState([]);
     const [classes, setClasses] = useState([]);
     const [races, setRaces] = useState([]);
 
+    const { id } = useParams();
+
     const { getToken, getCurrentUser } = useContext(UserProfileContext);
 
     const user = getCurrentUser();
 
     const history = useHistory();
-
-    useEffect(() => {
-        getAlignments();
-        getClasses();
-        getRaces();
-    }, [])
 
     
     const getAlignments = () => {
@@ -56,20 +52,26 @@ const CharacterSheetForm = () => {
         setSheet(newSheet);
     }
 
-    const addNewSheet = (sheet) => {
+    useEffect(() => {
+        getAlignments();
+        getClasses();
+        getRaces();
         getToken()
         .then((token) => {
-            fetch('/api/charactersheet', {
-                method: "POST",
+            console.log(id)
+            fetch(`/api/charactersheet/${id}`, {
+                method: "GET",
                 headers: {
-                    "Content-Type": "application/JSON",
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${token}`,
                 },
-                body: JSON.stringify(sheet)
             })
+            .then((res) => res.json())
+            .then((sheet) => {
+                setSheet(sheet);
+                console.log(sheet)
+            });
         })
-        .then(() => history.push('/'))
-    };
+    }, [])
 
     return (
         <Form>
@@ -82,16 +84,16 @@ const CharacterSheetForm = () => {
                      <Col md={4}>
                          <FormGroup>
                              <Label>Character Name</Label>
-                             <Input name="characterName" onChange={((e) => handleChange(e))}/>
+                             <Input name="characterName" defaultValue={sheet.characterName} onChange={((e) => handleChange(e))}/>
                          </FormGroup>
                      </Col>
                      <Col md={4}>
                          <FormGroup>
                              <Label>Alignment</Label>
                              <Input type="select" name="alignmentId" onChange={((e) => handleChange(e))}>
-                                 <option>Select an Alignment</option>
+                                 <option disabled hidden>Select an Alignment</option>
                                  {alignments.map((alignment) => (
-                                     <option value={alignment.id} key={alignment.id}>
+                                     <option value={alignment.id} key={alignment.id} selected={sheet.alignmentId === alignment.id} >
                                          {alignment.alignmentName}
                                      </option>
                                  ))}
@@ -109,9 +111,9 @@ const CharacterSheetForm = () => {
                      <Col md={5}>
                          <Label>Class</Label>
                          <Input type="select" name="classId" onChange={((e) => handleChange(e))}>
-                                 <option>Select a Class</option>
+                                 <option disabled hidden>Select a Class</option>
                                  {classes.map((classx) => (
-                                     <option value={classx.id} key={classx.id}>
+                                     <option value={classx.id} key={classx.id}  selected={sheet.classId === classx.id}>
                                          {classx.className}
                                      </option>
                                  ))}
@@ -120,44 +122,44 @@ const CharacterSheetForm = () => {
                      <Col md={1}>
                          <Label>Level</Label>
                          <Input type="select" name="characterLevel" onChange={((e) => handleChange(e))} >
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                            <option>7</option>
-                            <option>8</option>
-                            <option>9</option>
-                            <option>10</option>
-                            <option>11</option>
-                            <option>12</option>
-                            <option>13</option>
-                            <option>14</option>
-                            <option>15</option>
-                            <option>16</option>
-                            <option>17</option>
-                            <option>18</option>
-                            <option>19</option>
-                            <option>20</option>
+                            <option selected={sheet.characterLevel === 1}>1</option>
+                            <option selected={sheet.characterLevel === 2}>2</option>
+                            <option selected={sheet.characterLevel === 3}>3</option>
+                            <option selected={sheet.characterLevel === 4}>4</option>
+                            <option selected={sheet.characterLevel === 5}>5</option>
+                            <option selected={sheet.characterLevel === 6}>6</option>
+                            <option selected={sheet.characterLevel === 7}>7</option>
+                            <option selected={sheet.characterLevel === 8}>8</option>
+                            <option selected={sheet.characterLevel === 9}>9</option>
+                            <option selected={sheet.characterLevel === 10}>10</option>
+                            <option selected={sheet.characterLevel === 11}>11</option>
+                            <option selected={sheet.characterLevel === 12}>12</option>
+                            <option selected={sheet.characterLevel === 13}>13</option>
+                            <option selected={sheet.characterLevel === 14}>14</option>
+                            <option selected={sheet.characterLevel === 15}>15</option>
+                            <option selected={sheet.characterLevel === 16}>16</option>
+                            <option selected={sheet.characterLevel === 17}>17</option>
+                            <option selected={sheet.characterLevel === 18}>18</option>
+                            <option selected={sheet.characterLevel === 19}>19</option>
+                            <option selected={sheet.characterLevel === 20}>20</option>
                             </Input>
                      </Col>
                      <Col md={3}>
                          <Label>Deity</Label>
-                         <Input name="deity" onChange={((e) => handleChange(e))}/>
+                         <Input name="deity" defaultValue={sheet.deity} onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={3}>
                          <Label>Homeland</Label>
-                         <Input name="homeland" onChange={((e) => handleChange(e))}/>
+                         <Input name="homeland" defaultValue={sheet.homeland} onChange={((e) => handleChange(e))}/>
                      </Col>
                  </Row>
                  <Row>
                      <Col md={3}>
                          <Label>Race</Label>
-                         <Input type="select" name="raceId" onChange={((e) => handleChange(e))}>
-                                 <option>Select a Race</option>
+                         <Input type="select" name="raceId" defaultValue={sheet.raceId} onChange={((e) => handleChange(e))}>
+                                 <option disabled hidden>Select a Race</option>
                                  {races.map((race) => (
-                                     <option value={race.id} key={race.id}>
+                                     <option value={race.id} key={race.id} selected={sheet.raceId === race.id}>
                                          {race.raceName}
                                      </option>
                                  ))}
@@ -165,31 +167,31 @@ const CharacterSheetForm = () => {
                      </Col>
                      <Col md={3}>
                          <Label>Size</Label>
-                         <Input name="size" onChange={((e) => handleChange(e))}/>
+                         <Input name="size" defaultValue={sheet.size} onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={1}>
                          <Label>Gender</Label>
-                         <Input name="gender" onChange={((e) => handleChange(e))}/>
+                         <Input name="gender" defaultValue={sheet.gender} onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={1}>
                          <Label>Age</Label>
-                         <Input name="age" onChange={((e) => handleChange(e))}/>
+                         <Input name="age" defaultValue={sheet.age} onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={1}>
                          <Label>Height</Label>
-                         <Input name="height" onChange={((e) => handleChange(e))}/>
+                         <Input name="height" defaultValue={sheet.height} onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={1}>
                          <Label>Weight</Label>
-                         <Input name="weight" onChange={((e) => handleChange(e))}/>
+                         <Input name="weight" defaultValue={sheet.weight} onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={1}>
                          <Label>Hair</Label>
-                         <Input name="hair" onChange={((e) => handleChange(e))}/>
+                         <Input name="hair" defaultValue={sheet.hair} onChange={((e) => handleChange(e))}/>
                      </Col>
                      <Col md={1}>
                          <Label>Eyes</Label>
-                         <Input name="eyes" onChange={((e) => handleChange(e))}/>
+                         <Input name="eyes" defaultValue={sheet.eyes} onChange={((e) => handleChange(e))}/>
                      </Col>
                  </Row>
             </Col>
@@ -203,11 +205,11 @@ const CharacterSheetForm = () => {
                     <Row>
                         <Col md={{size:2,offset:4}}>
                         <Label>Current</Label>
-                        <Input name="currentHealth" onChange={((e) => handleChange(e))}/>
+                        <Input name="currentHealth" defaultValue={sheet.currentHealth} onChange={((e) => handleChange(e))}/>
                         </Col>
                         <Col md={2}>
                         <Label>Maximum</Label>
-                        <Input name="maxHealth" onChange={((e) => handleChange(e))}/>
+                        <Input name="maximumHealth" defaultValue={sheet.maximumHealth} onChange={((e) => handleChange(e))}/>
                         </Col>
                     </Row>
                     <br></br>
@@ -215,15 +217,15 @@ const CharacterSheetForm = () => {
                         <Row>
                             <Col md={{size:2, offset:3}}>
                                 <Label>Fortitude</Label>
-                                <Input name="fortitude" onChange={((e) => handleChange(e))}/>
+                                <Input name="fortitude" defaultValue={sheet.fortitude} onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Reflex</Label>
-                                <Input name="reflex" onChange={((e) => handleChange(e))}/>
+                                <Input name="reflex" defaultValue={sheet.reflex} onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Will</Label>
-                                <Input name="will" onChange={((e) => handleChange(e))}/>
+                                <Input name="will" defaultValue={sheet.will} onChange={((e) => handleChange(e))}/>
                             </Col>
                         </Row>                        
                     <br></br>
@@ -231,23 +233,23 @@ const CharacterSheetForm = () => {
                         <Row>
                             <Col md={{size:2, offset:1}}>
                                 <Label>Armor Class</Label>
-                                <Input name="armorClass" onChange={((e) => handleChange(e))}/>
+                                <Input name="armorClass" defaultValue={sheet.armorClass} onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Touch AC</Label>
-                                <Input name="touchAC" onChange={((e) => handleChange(e))}/>
+                                <Input name="touchAC" defaultValue={sheet.touchAC} onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Flat-Footed AC</Label>
-                                <Input name="flatFootedAC" onChange={((e) => handleChange(e))}/>
+                                <Input name="flatFootedAC" defaultValue={sheet.flatFootedAC} onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Spell Resistance</Label>
-                                <Input name="spellResistance" onChange={((e) => handleChange(e))}/>
+                                <Input name="spellResistance" defaultValue={sheet.spellResistance} onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>CMD</Label>
-                                <Input name="cMDefense" onChange={((e) => handleChange(e))}/>
+                                <Input name="cMDefense" defaultValue={sheet.cMDefense} onChange={((e) => handleChange(e))}/>
                             </Col>
                         </Row>
                         <br></br>
@@ -255,23 +257,23 @@ const CharacterSheetForm = () => {
                         <Row>
                             <Col md={{size:2, offset:1}}>
                                 <Label>Inititiative</Label>
-                                <Input name="inititiative" onChange={((e) => handleChange(e))}/>
+                                <Input name="inititiative" defaultValue={sheet.inititiative} onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Basic Attack Bonus</Label>
-                                <Input name="BaB" onChange={((e) => handleChange(e))}/>
+                                <Input name="basicAttackBonus" defaultValue={sheet.basicAttackBonus} onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Melee</Label>
-                                <Input name="melee" onChange={((e) => handleChange(e))}/>
+                                <Input name="melee" defaultValue={sheet.melee} onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Ranged</Label>
-                                <Input name="ranged" onChange={((e) => handleChange(e))}/>
+                                <Input name="ranged" defaultValue={sheet.ranged} onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>CMB</Label>
-                                <Input name="cMBouns" onChange={((e) => handleChange(e))}/>
+                                <Input name="cMBouns" defaultValue={sheet.cMBonus} onChange={((e) => handleChange(e))}/>
                             </Col>
                         </Row>
                         <br></br>
@@ -279,23 +281,23 @@ const CharacterSheetForm = () => {
                         <Row>
                             <Col md={{size:2, offset:1}}>
                                 <Label>Land</Label>
-                                <Input name="landSpeed" onChange={((e) => handleChange(e))}/>
+                                <Input name="landSpeed" defaultValue={sheet.landSpeed} onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Run</Label>
-                                <Input name="Run" onChange={((e) => handleChange(e))}/>
+                                <Input readOnly value={Math.floor(sheet.landSpeed * 4)} />
                             </Col>
                             <Col md={2}>
                                 <Label>Climb</Label>
-                                <Input name="climbSpeed" onChange={((e) => handleChange(e))}/>
+                                <Input name="climbSpeed" defaultValue={sheet.climbSpeed} onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Swim</Label>
-                                <Input name="swimSpeed" onChange={((e) => handleChange(e))}/>
+                                <Input name="swimSpeed" defaultValue={sheet.swimSpeed} onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Fly</Label>
-                                <Input name="flySpeed" onChange={((e) => handleChange(e))}/>
+                                <Input name="flySpeed" defaultValue={sheet.flySpeed} onChange={((e) => handleChange(e))}/>
                             </Col>
                         </Row>
                         <br></br>
@@ -303,18 +305,18 @@ const CharacterSheetForm = () => {
                         <Row>
                         <Col md={{size:5, offset:1}}>
                             <Label>Weapons</Label>
-                            <Input rows="5" type="textarea" name="weapon" onChange={((e) => handleChange(e))}/>
+                            <Input rows="5" type="textarea" name="weapon" defaultValue={sheet.weapon} onChange={((e) => handleChange(e))}/>
                         </Col>
                         <Col md={5}>
                             <Label>Armor</Label>
-                            <Input rows="5" type="textarea" name="armor" onChange={((e) => handleChange(e))}/>
+                            <Input rows="5" type="textarea" name="armor" defaultValue={sheet.armor} onChange={((e) => handleChange(e))}/>
                         </Col>
                         </Row>
                         <br></br>
                         <Row>
                             <Col md={{size:10, offset:1}}>
                                 <h1>Inventory</h1>
-                                <Input rows="10" type="textarea" name="inventory" onChange={((e) => handleChange(e))}/>
+                                <Input rows="10" type="textarea" name="inventory" defaultValue={sheet.inventory} onChange={((e) => handleChange(e))}/>
                             </Col>
                         </Row>
                 </Col>
@@ -335,12 +337,8 @@ const CharacterSheetForm = () => {
                         <br></br>
                     </Col>
                    
-            </Row> 
-            <Button color="info" onClick={e => {
-                e.preventDefault()
-                addNewSheet(sheet)
-            }}>Save Character</Button>         
+            </Row>       
         </Form>
     )
-}
-export default CharacterSheetForm;
+};
+export default CharacterSheetDetails;
