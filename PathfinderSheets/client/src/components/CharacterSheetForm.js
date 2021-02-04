@@ -305,7 +305,7 @@ const CharacterSheetForm = () => {
                         <Row>
                         <Col md={{size:5, offset:1}}>
                             <Label>Weapons</Label>
-                            <Input rows="5" type="textarea" name="weapons" id="weapons" onChange={((e) => handleChange(e))}/>
+                            <Input rows="5" type="textarea" name="weapon" id="weapons" onChange={((e) => handleChange(e))}/>
                         </Col>
                         <Col md={5}>
                             <Label>Armor</Label>
