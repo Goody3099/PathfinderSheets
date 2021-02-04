@@ -239,3 +239,8 @@ values (1, 'Half-elf', 30, 'Low-Light', '+2 of your choice', 'Medium'),
 	(6, 'Halfling', 20, 'Normal', '+2 Dex, +2 Cha, -2 Str', 'Small'),
 	(7, 'Human', 30, 'Normal', '+2 of your choice', 'Medium');
 set identity_insert [Race] off
+
+set identity_insert [UserProfile] on
+insert into [UserProfile] ([Id], [FirebaseUserId], [DisplayName], [FirstName], [LastName], [Email], [CreateDateTime], [ImageLocation])
+values (1, 'xwFwSGuS9HNnd8GhcBypmiOKQVt2', 'Goody', 'Matt', 'Goodman', 'mg@email.com', '2/4/2021 12:29:24 PM' , NULL);
+set identity_insert [UserProfile] off

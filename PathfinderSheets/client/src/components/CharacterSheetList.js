@@ -1,25 +1,27 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Card, CardBody, CardImg, CardSubtitle, CardTitle } from "reactstrap";
-
+import { Card, CardBody, CardImg, CardText, CardTitle, Col, Row } from "reactstrap";
 
 const CharacterSheetList = ({sheets}) => {
+  console.log(sheets)
     return (
-        <div>
+      <Row>
       {sheets.map((sheet) => {
            return (
-            <Link to={`/charactersheet/${sheet.id}`}>
+             <Col md={3}>
+            <Link to={`/charactersheet/${sheet.characterSheet.id}`}>
               <Card>
-                <CardImg top width="100%" src={sheet.CharacterPicture} alt={sheet.CharacterName} />
+                <CardImg top width="100%" src={sheet.characterSheet.characterPicture} alt={sheet.characterSheet.characterName} />
                 <CardBody>
-                  <CardTitle tag="h5">{sheet.CharacterName}</CardTitle>
-                  <CardSubtitle tag="h6" className="mb-2 text-muted">Level {sheet.CharacterLevel} {sheet.Class}</CardSubtitle>
+                  <CardTitle tag="h5">{sheet.characterSheet.characterName}</CardTitle>
+                  <CardText tag="h6">Level {sheet.characterSheet.characterLevel} {sheet.race.raceName} {sheet.class.className}</CardText>
                 </CardBody>
               </Card>
             </Link>
+            </Col>
           );
       })}
-    </div>
+      </Row>
     );
 };
 export default CharacterSheetList;

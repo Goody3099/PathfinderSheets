@@ -21,6 +21,10 @@ namespace PathfinderSheets.Repository
         {
             return _context.CharacterSheet
                 .Where(cs => cs.UserProfileId == id)
+                .Include(cs => cs.Race)
+                .Include(cs => cs.Class)
+                .Include(cs => cs.UserProfile)
+                .Include(cs => cs.Alignment)
                 .ToList();
         }
 

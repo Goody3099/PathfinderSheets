@@ -5,6 +5,7 @@ import Login from "../pages/Login";
 import Register from "../pages/Register";
 import Home from "../pages/Home";
 import CharacterSheetForm from "./CharacterSheetForm";
+import CharacterSheetDetails from "../pages/CharacterSheetDetails";
 
 const ApplicationViews = () => {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -16,6 +17,9 @@ const ApplicationViews = () => {
       </Route>
       <Route path="/form" exact>
         {isLoggedIn ? <CharacterSheetForm /> : <Redirect to="/login" />}
+      </Route>
+      <Route path="/charactersheet/:id" exact>
+        {isLoggedIn ? <CharacterSheetDetails /> : <Redirect to="/login" />}
       </Route>
       <Route path="/login">
         <Login />

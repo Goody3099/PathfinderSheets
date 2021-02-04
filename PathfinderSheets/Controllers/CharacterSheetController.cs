@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using PathfinderSheets.Models;
+using PathfinderSheets.Models.VIew_Models;
 using PathfinderSheets.Repository;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,19 @@ namespace PathfinderSheets.Controllers
         {
             var currentUser = GetCurrentUserProfile();
             var characterSheets = _characterSheetRepo.GetCharacterSheetsByUserProfileId(currentUser.Id);
-            return Ok(characterSheets);
+            List<SheetDetails> sheetDetails = new List<SheetDetails>();
+            foreach (var character in characterSheets)
+            {
+                sheetDetails.Add(new SheetDetails()
+                {
+                    Alignment = character.Alignment,
+                    Class = character.Class,
+                    Race = character.Race,
+                    CharacterSheet = _characterSheetRepo.GetById(character.Id),
+                    UserProfile = character.UserProfile,
+                });
+            }
+            return Ok(sheetDetails);
         }
 
         [HttpGet("{id}")]
