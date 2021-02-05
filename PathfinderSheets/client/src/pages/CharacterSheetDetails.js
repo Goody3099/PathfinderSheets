@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { Col, Form, FormGroup, Input, Label, Row } from 'reactstrap';
+import { Col, Form, FormGroup, Input, Label, Row, Button } from 'reactstrap';
 import Attributes from "../components/Attributes";
 import Skills from "../components/Skills";
 import { UserProfileContext } from "../providers/UserProfileProvider";
@@ -32,12 +32,11 @@ const CharacterSheetDetails = () => {
             .then((res) => res.json())
             .then((sheet) => {
                 setSheet(sheet);
-                setInterval(updateCharacterSheet(sheet), 30000)
             });
         })
     }
 
-    const updateCharacterSheet = (sheet) => {
+    const updateCharacterSheet = () => {
         getToken()
         .then((token) => {
             fetch(`/api/charactersheet/${sheet.id}`, {
@@ -49,7 +48,6 @@ const CharacterSheetDetails = () => {
                 body: JSON.stringify(sheet),
             })
         })
-        .then(e => history.push(`/charactersheet/${sheet.id}`))
     }
 
     const getAlignments = () => {
@@ -89,6 +87,13 @@ const CharacterSheetDetails = () => {
         getRaces();
         getCharacterSheetById();
     }, [])
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            updateCharacterSheet();
+        }, 10000);
+        return () => clearInterval(timer);
+    }, [sheet])
 
     return (
         <Form>
@@ -354,7 +359,11 @@ const CharacterSheetDetails = () => {
                         <br></br>
                     </Col>
                    
-            </Row>       
+            </Row> 
+            <Button color="info" onClick={e => {
+                e.preventDefault()
+                updateCharacterSheet()
+            }}>Save Character</Button>    
         </Form>
     )
 };
