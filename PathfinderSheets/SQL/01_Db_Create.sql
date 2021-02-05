@@ -27,6 +27,8 @@ CREATE TABLE [UserProfile] (
 GO
 
 CREATE TABLE [CharacterSheet] (
+  [Id] integer PRIMARY KEY IDENTITY,
+  [UserProfileId] integer,
   [Acrobatics] integer,
   [Age] integer,
   [AlignmentId] integer,
@@ -68,7 +70,6 @@ CREATE TABLE [CharacterSheet] (
   [Heal] integer,
   [Height] nvarchar(255),
   [Homeland] nvarchar (255),
-  [Id] integer PRIMARY KEY IDENTITY,
   [Inititiative] integer,
   [Intelligence] integer,
   [Intimidate] integer,
@@ -111,7 +112,6 @@ CREATE TABLE [CharacterSheet] (
   [TotalSkillPoints] integer,
   [TouchAC] integer,
   [UseMagicDevice] integer,
-  [UserProfileId] integer,
   [Weapon] nvarchar(255),
   [Weight] nvarchar(255),
   [Will] integer,

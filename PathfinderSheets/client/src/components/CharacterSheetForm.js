@@ -68,7 +68,7 @@ const CharacterSheetForm = () => {
                 body: JSON.stringify(sheet)
             })
         })
-        .then(() => history.push('/'))
+        .then(() => history.push('/home'))
     };
 
     return (
@@ -82,14 +82,14 @@ const CharacterSheetForm = () => {
                      <Col md={4}>
                          <FormGroup>
                              <Label>Character Name</Label>
-                             <Input name="characterName" onChange={((e) => handleChange(e))}/>
+                             <Input name="characterName" required onChange={((e) => handleChange(e))}/>
                          </FormGroup>
                      </Col>
                      <Col md={4}>
                          <FormGroup>
                              <Label>Alignment</Label>
-                             <Input type="select" name="alignmentId" onChange={((e) => handleChange(e))}>
-                                 <option>Select an Alignment</option>
+                             <Input type="select" name="alignmentId" required onChange={((e) => handleChange(e))}>
+                                 <option hidden>Select an Alignment</option>
                                  {alignments.map((alignment) => (
                                      <option value={alignment.id} key={alignment.id}>
                                          {alignment.alignmentName}
@@ -108,8 +108,8 @@ const CharacterSheetForm = () => {
                  <Row>
                      <Col md={5}>
                          <Label>Class</Label>
-                         <Input type="select" name="classId" onChange={((e) => handleChange(e))}>
-                                 <option>Select a Class</option>
+                         <Input type="select" name="classId" required onChange={((e) => handleChange(e))}>
+                                 <option hidden>Select a Class</option>
                                  {classes.map((classx) => (
                                      <option value={classx.id} key={classx.id}>
                                          {classx.className}
@@ -119,7 +119,8 @@ const CharacterSheetForm = () => {
                      </Col>
                      <Col md={1}>
                          <Label>Level</Label>
-                         <Input type="select" name="characterLevel" onChange={((e) => handleChange(e))} >
+                         <Input type="select" name="characterLevel" required onChange={((e) => handleChange(e))} >
+                             <option hidden>Select a Level</option>
                             <option>1</option>
                             <option>2</option>
                             <option>3</option>
@@ -154,8 +155,8 @@ const CharacterSheetForm = () => {
                  <Row>
                      <Col md={3}>
                          <Label>Race</Label>
-                         <Input type="select" name="raceId" onChange={((e) => handleChange(e))}>
-                                 <option>Select a Race</option>
+                         <Input type="select" name="raceId" required onChange={((e) => handleChange(e))}>
+                                 <option hidden>Select a Race</option>
                                  {races.map((race) => (
                                      <option value={race.id} key={race.id}>
                                          {race.raceName}

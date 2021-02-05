@@ -55,7 +55,7 @@ const AppHeader = () => {
                   </NavItem>
                 )}
                 <NavItem>
-                  <NavLink onClick={logoutAndReturn} tag={Link}>
+                  <NavLink to="/login" onClick={logoutAndReturn} tag={Link}>
                     Logout
                     </NavLink>
                 </NavItem>
