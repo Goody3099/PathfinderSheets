@@ -72,8 +72,6 @@ namespace PathfinderSheets.Controllers
         public IActionResult Put(int id, CharacterSheet sheet)
         {
             var existingSheet = _characterSheetRepo.GetById(id);
-            var originalId = existingSheet.Id;
-            var originalUserProfileId = existingSheet.UserProfileId;
 
             if (id != sheet.Id)
             {
@@ -83,9 +81,92 @@ namespace PathfinderSheets.Controllers
             {
                 return Unauthorized();
             }
-            existingSheet = sheet;
-            existingSheet.Id = originalId;
-            existingSheet.UserProfileId = originalUserProfileId;
+            existingSheet.Acrobatics = sheet.Acrobatics;
+            existingSheet.Age = sheet.Age;
+            existingSheet.AlignmentId = sheet.AlignmentId;
+            existingSheet.Appraise = sheet.Appraise;
+            existingSheet.ArmorClass = sheet.ArmorClass;
+            existingSheet.BasicAttackBonus = sheet.BasicAttackBonus;
+            existingSheet.Bluff = sheet.Bluff;
+            existingSheet.CharacterLevel = sheet.CharacterLevel;
+            existingSheet.Charisma = sheet.Charisma;
+            existingSheet.ClassId = sheet.ClassId;
+            existingSheet.Climb = sheet.Climb;
+            existingSheet.ClimbSpeed = sheet.ClimbSpeed;
+            existingSheet.CMBouns = sheet.CMBouns;
+            existingSheet.CMDefense = sheet.CMDefense;
+            existingSheet.Constitution = sheet.Constitution;
+            existingSheet.Copper = sheet.Copper;
+            existingSheet.Craft = sheet.Craft;
+            existingSheet.CurrentEXP = sheet.CurrentEXP;
+            existingSheet.CurrentHealth = sheet.CurrentHealth;
+            existingSheet.Dexterity = sheet.Dexterity;
+            existingSheet.Diplomacy = sheet.Diplomacy;
+            existingSheet.DisableDevice = sheet.DisableDevice;
+            existingSheet.EscapeArtist = sheet.EscapeArtist;
+            existingSheet.FlatFootedAC = sheet.FlatFootedAC;
+            existingSheet.Fly = sheet.Fly;
+            existingSheet.FlySpeed = sheet.FlySpeed;
+            existingSheet.Fortitude = sheet.Fortitude;
+            existingSheet.Gold = sheet.Gold;
+            existingSheet.HandleAnimal = sheet.HandleAnimal;
+            existingSheet.Heal = sheet.Heal;
+            existingSheet.Id = sheet.Id;
+            existingSheet.Inititiative = sheet.Inititiative;
+            existingSheet.Intelligence = sheet.Intelligence;
+            existingSheet.Intimidate = sheet.Intimidate;
+            existingSheet.KnowledgeArcana = sheet.KnowledgeArcana;
+            existingSheet.KnowledgeDungeoneering = sheet.KnowledgeDungeoneering;
+            existingSheet.KnowledgeGeography = sheet.KnowledgeGeography;
+            existingSheet.KnowledgeHistory = sheet.KnowledgeHistory;
+            existingSheet.KnowledgeLocal = sheet.KnowledgeLocal;
+            existingSheet.KnowledgeNature = sheet.KnowledgeNature;
+            existingSheet.KnowledgeNobility = sheet.KnowledgeNobility;
+            existingSheet.KnowledgePlanes = sheet.KnowledgePlanes;
+            existingSheet.KnowledgeReligion = sheet.KnowledgeReligion;
+            existingSheet.LandSpeed = sheet.LandSpeed;
+            existingSheet.Linguistics = sheet.Linguistics;
+            existingSheet.MaximumHealth = sheet.MaximumHealth;
+            existingSheet.Melee = sheet.Melee;
+            existingSheet.NextLevelEXP = sheet.NextLevelEXP;
+            existingSheet.Perception = sheet.Perception;
+            existingSheet.Platnium = sheet.Platnium;
+            existingSheet.Profession = sheet.Profession;
+            existingSheet.RaceId = sheet.RaceId;
+            existingSheet.Ranged = sheet.Ranged;
+            existingSheet.Reflex = sheet.Reflex;
+            existingSheet.Ride = sheet.Ride;
+            existingSheet.SenseMotive = sheet.SenseMotive;
+            existingSheet.Silver = sheet.Silver;
+            existingSheet.SleightOfHand = sheet.SleightOfHand;
+            existingSheet.SpellResistance = sheet.SpellResistance;
+            existingSheet.Stealth = sheet.Stealth;
+            existingSheet.Strength = sheet.Strength;
+            existingSheet.Survival = sheet.Survival;
+            existingSheet.Swim = sheet.Swim;
+            existingSheet.SwimSpeed = sheet.SwimSpeed;
+            existingSheet.TotalSkillPoints = sheet.TotalSkillPoints;
+            existingSheet.TouchAC = sheet.TouchAC;
+            existingSheet.UseMagicDevice = sheet.UseMagicDevice;
+            existingSheet.UserProfileId = sheet.UserProfileId;
+            existingSheet.Will = sheet.Will;
+            existingSheet.Wisdom = sheet.Wisdom;
+            existingSheet.Armor = sheet.Armor;
+            existingSheet.CharacterFeats = sheet.CharacterFeats;
+            existingSheet.CharacterName = sheet.CharacterName;
+            existingSheet.CharacterPicture = sheet.CharacterPicture;
+            existingSheet.Deity = sheet.Deity;
+            existingSheet.Eyes = sheet.Eyes;
+            existingSheet.Gender = sheet.Gender;
+            existingSheet.Hair = sheet.Hair;
+            existingSheet.Height = sheet.Height;
+            existingSheet.Homeland = sheet.Homeland;
+            existingSheet.Languages = sheet.Languages;
+            existingSheet.Size = sheet.Size;
+            existingSheet.Spells = sheet.Spells;
+            existingSheet.Weapon = sheet.Weapon;
+            existingSheet.Weight = sheet.Weight;
+
             _characterSheetRepo.Update(existingSheet);
             return NoContent();
         }

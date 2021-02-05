@@ -20,7 +20,38 @@ const CharacterSheetDetails = () => {
 
     const history = useHistory();
 
-    
+    const getCharacterSheetById = () => {
+        getToken()
+        .then((token) => {
+            fetch(`/api/charactersheet/${id}`, {
+                method: "GET",
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                },
+            })
+            .then((res) => res.json())
+            .then((sheet) => {
+                setSheet(sheet);
+                setInterval(updateCharacterSheet(sheet), 30000)
+            });
+        })
+    }
+
+    const updateCharacterSheet = (sheet) => {
+        getToken()
+        .then((token) => {
+            fetch(`/api/charactersheet/${sheet.id}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+                body: JSON.stringify(sheet),
+            })
+        })
+        .then(e => history.push(`/charactersheet/${sheet.id}`))
+    }
+
     const getAlignments = () => {
         fetch('/api/alignment')
         .then(res => res.json())
@@ -56,21 +87,7 @@ const CharacterSheetDetails = () => {
         getAlignments();
         getClasses();
         getRaces();
-        getToken()
-        .then((token) => {
-            console.log(id)
-            fetch(`/api/charactersheet/${id}`, {
-                method: "GET",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            })
-            .then((res) => res.json())
-            .then((sheet) => {
-                setSheet(sheet);
-                console.log(sheet)
-            });
-        })
+        getCharacterSheetById();
     }, [])
 
     return (
