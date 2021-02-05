@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,6 +12,7 @@ namespace PathfinderSheets.Models
         public Class Class { get; set; }
         public int Acrobatics { get; set; }
         public int Age { get; set; }
+        [Required]
         public int AlignmentId { get; set; }
         public int Appraise { get; set; }
         public int ArmorClass { get; set; }
@@ -18,6 +20,7 @@ namespace PathfinderSheets.Models
         public int Bluff { get; set; }
         public int CharacterLevel { get; set; }
         public int Charisma { get; set; }
+        [Required]
         public int ClassId { get; set; }
         public int Climb { get; set; }
         public int ClimbSpeed { get; set; }
@@ -60,6 +63,7 @@ namespace PathfinderSheets.Models
         public int Perception { get; set; }
         public int Platnium { get; set; }
         public int Profession { get; set; }
+        [Required]
         public int RaceId { get; set; }
         public int Ranged { get; set; }
         public int Reflex { get; set; }
