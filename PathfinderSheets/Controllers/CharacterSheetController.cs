@@ -90,7 +90,7 @@ namespace PathfinderSheets.Controllers
             return NoContent();
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult Delete(int id)
         {
             var existingSheet = _characterSheetRepo.GetById(id);

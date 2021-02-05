@@ -7,7 +7,11 @@ const Home = () => {
     const { getToken } = useContext(UserProfileContext);
 
     useEffect(() => {
-      getToken()
+      getCharacterSheets()
+    }, []);
+
+    const getCharacterSheets = () => {
+      return getToken()
       .then((token) =>
         fetch("/api/charactersheet", {
           method: "GET",
@@ -19,13 +23,13 @@ const Home = () => {
         .then((sheets) => {
             setSheets(sheets);
         }));
-    }, []);
+    }
 
     return (
         <div className="column">
           <div className="row">
             <div className="col-lg-10 col-xs-12">
-              <CharacterSheetList sheets={sheets} />
+              <CharacterSheetList sheets={sheets} getCharacterSheets={getCharacterSheets} />
             </div>
           </div>
         </div >
