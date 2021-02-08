@@ -11,6 +11,8 @@ const CharacterSheetDetails = () => {
     const [alignments, setAlignments] = useState([]);
     const [classes, setClasses] = useState([]);
     const [races, setRaces] = useState([]);
+    const [levelClass, setNewLevelClass] = useState({});
+    const [data, setData] = useState({});
 
     const { id } = useParams();
 
@@ -68,6 +70,15 @@ const CharacterSheetDetails = () => {
         .then(res => setRaces(res))
     };
 
+    const getLevelClassData = () => {
+        fetch('/api/class', {
+            method: "GET",
+            body: JSON.stringify(levelClass)
+        })
+        .then(res => res.json())
+        .then(res => setData(res))
+    };
+
     const skillArray = ["Acrobatics", "Appraise", "Bluff", "Climb", "Craft", "Diplomacy", "Disable Device", "Escape Artist", "Fly", "Handle Animal", "Heal", "Intimidate",
                         "Knowledge(Arcana)", "Knowledge(Dungeoneering)", "Knowledge(Engineering)", "Knowledge(Geography)", "Knowledge(History)", "Knowledge(Local)", "Knowledge(Nature)",
                         "Knowledge(Nobility)", "Knowledge(Planes)", "Knowledge(Religion)", "Linguistics", "Perception", "Perform", "Profession", "Ride", "Sense Motive", "Sleight of Hand",
@@ -79,6 +90,12 @@ const CharacterSheetDetails = () => {
         const newSheet = {...sheet};
         newSheet[e.target.name] = e.target.value;
         setSheet(newSheet);
+    }
+
+    const handleLevelClassChange = (e) => {
+        const newLevelClass = {...levelClass};
+        newLevelClass[e.target.name] = e.target.value;
+        setNewLevelClass(newLevelClass);
     }
 
     useEffect(() => {
@@ -132,7 +149,8 @@ const CharacterSheetDetails = () => {
                  <Row>
                      <Col md={5}>
                          <Label>Class</Label>
-                         <Input type="select" name="classId" onChange={((e) => handleChange(e))}>
+                         <Input type="select" name="classId" onChange={((e) => { handleChange(e)
+                        handleLevelClassChange(e)})}>
                                  <option disabled hidden>Select a Class</option>
                                  {classes.map((classx) => (
                                      <option value={classx.id} key={classx.id}  selected={sheet.classId === classx.id}>
@@ -143,7 +161,8 @@ const CharacterSheetDetails = () => {
                      </Col>
                      <Col md={1}>
                          <Label>Level</Label>
-                         <Input type="select" name="characterLevel" onChange={((e) => handleChange(e))} >
+                         <Input type="select" name="characterLevel" onChange={((e) => { handleChange(e)
+                        handleLevelClassChange(e)})} >
                             <option selected={sheet.characterLevel === 1}>1</option>
                             <option selected={sheet.characterLevel === 2}>2</option>
                             <option selected={sheet.characterLevel === 3}>3</option>
@@ -239,15 +258,15 @@ const CharacterSheetDetails = () => {
                         <Row>
                             <Col md={{size:2, offset:3}}>
                                 <Label>Fortitude</Label>
-                                <Input name="fortitude" defaultValue={sheet.fortitude} onChange={((e) => handleChange(e))}/>
+                                <Input name="fortitude" defaultValue={data.fortitude ? data.fortitude : sheet.fortitude} onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Reflex</Label>
-                                <Input name="reflex" defaultValue={sheet.reflex} onChange={((e) => handleChange(e))}/>
+                                <Input name="reflex" defaultValue={data.reflex ? data.reflex : sheet.reflex} onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Will</Label>
-                                <Input name="will" defaultValue={sheet.will} onChange={((e) => handleChange(e))}/>
+                                <Input name="will" defaultValue={data.will ? data.will : sheet.will} onChange={((e) => handleChange(e))}/>
                             </Col>
                         </Row>                        
                     <br></br>
@@ -283,7 +302,7 @@ const CharacterSheetDetails = () => {
                             </Col>
                             <Col md={2}>
                                 <Label>Basic Attack Bonus</Label>
-                                <Input name="basicAttackBonus" defaultValue={sheet.basicAttackBonus} onChange={((e) => handleChange(e))}/>
+                                <Input name="basicAttackBonus" defaultValue={data.basicAttackBonus ? data.basicAttackBonus : sheet.basicAttackBonus} onChange={((e) => handleChange(e))}/>
                             </Col>
                             <Col md={2}>
                                 <Label>Melee</Label>
@@ -349,11 +368,11 @@ const CharacterSheetDetails = () => {
                         <Row>
                         <Col md={{size:2, offset:4}}>
                             <Label>Skill Points Used</Label>
-                            <Input readOnly value />
+                            <Input readOnly value={sheet} />
                         </Col>
                         <Col md={2}>
                             <Label>Total Skill Points</Label>
-                            <Input readOnly value />
+                            <Input readOnly value={data.skillPoints ? (data.skillPoints + Math.floor((sheet.intelligence - 10) / 2)) * sheet.characterLevel : (sheet.skillPoints + Math.floor((sheet.intelligence - 10) / 2)) * sheet.characterLevel} />
                         </Col>
                         </Row>
                         <br></br>

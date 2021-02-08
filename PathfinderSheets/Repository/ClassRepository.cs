@@ -20,14 +20,15 @@ namespace PathfinderSheets.Repository
         public List<Class> Get()
         {
             return _context.Class
+                .DistinctBy(c => c.ClassName)
                 .ToList();
         }
 
-        public List<Class> Get2()
+        public Class GetByLevelClassName(Class x)
         {
-            return _context.Class
-                .DistinctBy(c => c.ClassName)
-                .ToList();
+            return _context.Class.Where(c => c.ClassName == x.ClassName)
+                .Where(c => c.CharacterLevel == x.CharacterLevel)
+                .FirstOrDefault();
         }
     }
 }
