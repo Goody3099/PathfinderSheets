@@ -20,7 +20,7 @@ namespace PathfinderSheets.Models
         public int CharacterLevel { get; set; }
         public int Charisma { get; set; }
         [Required]
-        public int ClassId { get; set; }
+        public int ClassDataId { get; set; }
         public int Climb { get; set; }
         public int ClimbSpeed { get; set; }
         public int CMBouns { get; set; }

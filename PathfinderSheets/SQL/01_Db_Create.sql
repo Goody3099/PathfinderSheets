@@ -10,6 +10,7 @@ GO
 DROP TABLE IF EXISTS [CharacterSheet];
 DROP TABLE IF EXISTS [Race];
 DROP TABLE IF EXISTS [Class];
+DROP TABLE IF EXISTS [ClassData];
 DROP TABLE IF EXISTS [Alignment];
 DROP TABLE IF EXISTS [UserProfile];
 GO
@@ -41,7 +42,7 @@ CREATE TABLE [CharacterSheet] (
   [CharacterName] nvarchar(255),
   [CharacterPicture] nvarchar(255),
   [Charisma] integer,
-  [ClassNameId] integer,
+  [ClassDataId] integer,
   [Climb] integer,
   [ClimbSpeed] integer,
   [CMBouns] integer,
@@ -123,7 +124,7 @@ GO
 
 CREATE TABLE [Class] (
   [Id] integer PRIMARY KEY IDENTITY,
-  [ClassNameId] integer,
+  [ClassDataId] integer,
   [CharacterLevel] integer,
   [BaB] integer,
   [Reflex] integer,
@@ -134,7 +135,7 @@ CREATE TABLE [Class] (
 )
 GO
 
-CREATE TABLE [ClassName] (
+CREATE TABLE [ClassData] (
 [Id] integer PRIMARY KEY IDENTITY,
 [ClassName] nvarchar(225),
 )
@@ -159,5 +160,8 @@ GO
 ALTER TABLE [CharacterSheet] ADD FOREIGN KEY ([RaceId]) REFERENCES [Race] ([Id])
 GO
 
-ALTER TABLE [CharacterSheet] ADD FOREIGN KEY ([ClassNameId]) REFERENCES [ClassName] ([Id])
+ALTER TABLE [CharacterSheet] ADD FOREIGN KEY ([ClassDataId]) REFERENCES [ClassData] ([Id])
+GO
+
+ALTER TABLE [Class] ADD FOREIGN KEY ([ClassDataId]) REFERENCES [ClassData] ([Id])
 GO

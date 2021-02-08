@@ -86,11 +86,10 @@ namespace PathfinderSheets.Controllers
             existingSheet.AlignmentId = sheet.AlignmentId;
             existingSheet.Appraise = sheet.Appraise;
             existingSheet.ArmorClass = sheet.ArmorClass;
-            existingSheet.BasicAttackBonus = sheet.BasicAttackBonus;
             existingSheet.Bluff = sheet.Bluff;
             existingSheet.CharacterLevel = sheet.CharacterLevel;
             existingSheet.Charisma = sheet.Charisma;
-            existingSheet.ClassId = sheet.ClassId;
+            existingSheet.ClassDataId = sheet.ClassDataId;
             existingSheet.Climb = sheet.Climb;
             existingSheet.ClimbSpeed = sheet.ClimbSpeed;
             existingSheet.CMBouns = sheet.CMBouns;
@@ -107,7 +106,6 @@ namespace PathfinderSheets.Controllers
             existingSheet.FlatFootedAC = sheet.FlatFootedAC;
             existingSheet.Fly = sheet.Fly;
             existingSheet.FlySpeed = sheet.FlySpeed;
-            existingSheet.Fortitude = sheet.Fortitude;
             existingSheet.Gold = sheet.Gold;
             existingSheet.HandleAnimal = sheet.HandleAnimal;
             existingSheet.Heal = sheet.Heal;
@@ -134,7 +132,6 @@ namespace PathfinderSheets.Controllers
             existingSheet.Profession = sheet.Profession;
             existingSheet.RaceId = sheet.RaceId;
             existingSheet.Ranged = sheet.Ranged;
-            existingSheet.Reflex = sheet.Reflex;
             existingSheet.Ride = sheet.Ride;
             existingSheet.SenseMotive = sheet.SenseMotive;
             existingSheet.Silver = sheet.Silver;
@@ -149,7 +146,6 @@ namespace PathfinderSheets.Controllers
             existingSheet.TouchAC = sheet.TouchAC;
             existingSheet.UseMagicDevice = sheet.UseMagicDevice;
             existingSheet.UserProfileId = sheet.UserProfileId;
-            existingSheet.Will = sheet.Will;
             existingSheet.Wisdom = sheet.Wisdom;
             existingSheet.Armor = sheet.Armor;
             existingSheet.CharacterFeats = sheet.CharacterFeats;

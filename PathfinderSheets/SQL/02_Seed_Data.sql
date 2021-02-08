@@ -5,8 +5,23 @@ values (1, 'Lawful Good'), (2, 'Neutral Good'), (3, 'Chaotic Good'),
 	   (7, 'Lawful Evil'), (8, 'Neutral Evil'), (9, 'Chaotic Evil');
 set identity_insert [Alignment] off
 
+set identity_insert [ClassData] on
+insert into [ClassData] ([Id], [ClassName])
+values (1, 'Barbarian'),
+	   (2, 'Bard'),
+	   (3, 'Cleric'),
+	   (4, 'Druid'),
+	   (5, 'Fighter'),
+	   (6, 'Monk'),
+	   (7, 'Paladin'),
+	   (8, 'Ranger'),
+	   (9, 'Rogue'),
+	   (10, 'Sorcerer'),
+	   (11, 'Wizard');
+set identity_insert [ClassData] off
+
 set identity_insert [Class] on
-insert into [Class] ([Id], [ClassNameId], [CharacterLevel], [BaB], [Fort], [Reflex],[Will], [HitDie], [SkillPoints])
+insert into [Class] ([Id], [ClassDataId], [CharacterLevel], [BaB], [Fort], [Reflex],[Will], [HitDie], [SkillPoints])
 values (1, 1, 1, 1, 2, 0, 0, 12, 4),
 	(2, 1, 2, 2, 3, 0, 0, 12, 4),
 	(3, 1, 4, 4, 4, 1, 1, 12, 4),
@@ -227,21 +242,6 @@ values (1, 1, 1, 1, 2, 0, 0, 12, 4),
 	(219, 11, 19, 9, 6, 6, 11, 6, 2),
 	(220, 11, 20, 10, 6, 6, 12, 6, 2);
 set identity_insert [Class] off
-
-set identity_insert [ClassName] on
-insert into [ClassName] ([Id], [ClassName])
-values (1, 'Barbarian'),
-	   (2, 'Bard'),
-	   (3, 'Cleric'),
-	   (4, 'Druid'),
-	   (5, 'Fighter'),
-	   (6, 'Monk'),
-	   (7, 'Paladin'),
-	   (8, 'Ranger'),
-	   (9, 'Rogue'),
-	   (10, 'Sorcerer'),
-	   (11, 'Wizard');
-set identity_insert [ClassName] off
 
 set identity_insert [Race] on
 insert into [Race] ([Id], [RaceName], [MovementSpeed], [Vision], [BonusAttributes], [Size])

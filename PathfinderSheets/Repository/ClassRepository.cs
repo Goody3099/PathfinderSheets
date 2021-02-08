@@ -17,18 +17,22 @@ namespace PathfinderSheets.Repository
             _context = context;
         }
 
-        public List<Class> Get()
+        public List<ClassData> Get()
         {
-            return _context.Class
-                .DistinctBy(c => c.ClassName)
+            return _context.ClassData
                 .ToList();
         }
 
         public Class GetByLevelClassName(int level, string className)
         {
-            return _context.Class.Where(c => c.ClassName == className)
+            var x = _context.ClassData
+                .Where(cd => cd.ClassName == className)
+                .FirstOrDefault();
+            var y = _context.Class
+                .Where(c => c.ClassDataId == x.Id)
                 .Where(c => c.CharacterLevel == level)
                 .FirstOrDefault();
+            return y;
         }
     }
 }

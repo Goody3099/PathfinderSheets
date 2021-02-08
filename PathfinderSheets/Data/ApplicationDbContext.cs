@@ -17,6 +17,7 @@ namespace PathfinderSheets.Data
         public DbSet<Alignment> Alignment { get; set; }
         public DbSet<CharacterSheet> CharacterSheet { get; set; }
         public DbSet<Class> Class { get; set; }
+        public DbSet<ClassData> ClassData { get; set; }
         public DbSet<Race> Race { get; set; }
         public DbSet<UserProfile> UserProfile { get; set; }
     }
