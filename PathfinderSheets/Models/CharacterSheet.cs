@@ -16,7 +16,6 @@ namespace PathfinderSheets.Models
         public int AlignmentId { get; set; }
         public int Appraise { get; set; }
         public int ArmorClass { get; set; }
-        public int BasicAttackBonus { get; set; }
         public int Bluff { get; set; }
         public int CharacterLevel { get; set; }
         public int Charisma { get; set; }
@@ -38,7 +37,6 @@ namespace PathfinderSheets.Models
         public int FlatFootedAC { get; set; }
         public int Fly { get; set; }
         public int FlySpeed { get; set; }
-        public int Fortitude { get; set; }
         public int Gold { get; set; }
         public int HandleAnimal { get; set; }
         public int Heal { get; set; }
@@ -66,7 +64,6 @@ namespace PathfinderSheets.Models
         [Required]
         public int RaceId { get; set; }
         public int Ranged { get; set; }
-        public int Reflex { get; set; }
         public int Ride { get; set; }
         public int SenseMotive { get; set; }
         public int Silver { get; set; }
@@ -81,7 +78,6 @@ namespace PathfinderSheets.Models
         public int TouchAC { get; set; }
         public int UseMagicDevice { get; set; }
         public int UserProfileId { get; set; }
-        public int Will { get; set; }
         public int Wisdom { get; set; }
         public Race Race { get; set; }
         public string Armor { get; set; }

@@ -24,10 +24,10 @@ namespace PathfinderSheets.Repository
                 .ToList();
         }
 
-        public Class GetByLevelClassName(Class x)
+        public Class GetByLevelClassName(int level, string className)
         {
-            return _context.Class.Where(c => c.ClassName == x.ClassName)
-                .Where(c => c.CharacterLevel == x.CharacterLevel)
+            return _context.Class.Where(c => c.ClassName == className)
+                .Where(c => c.CharacterLevel == level)
                 .FirstOrDefault();
         }
     }

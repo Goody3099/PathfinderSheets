@@ -9,6 +9,6 @@ namespace PathfinderSheets.Repository
     public interface IClassRepository
     {
         List<Class> Get();
-        Class GetByLevelClassName(Class x);
+        Class GetByLevelClassName(int level, string className);
     }
 }
