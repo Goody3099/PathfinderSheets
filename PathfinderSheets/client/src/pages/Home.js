@@ -24,7 +24,9 @@ const Home = () => {
             setSheets(sheets);
         }));
     }
-
+    
+    if(!sheets) return null;
+    
     return (
         <div className="column">
           <div className="row">

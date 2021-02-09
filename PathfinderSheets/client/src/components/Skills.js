@@ -38,6 +38,118 @@ const Skills = ({skill, handleChange, sheet}) => {
         return string[0].toLowerCase() + string.slice(1);
       };
 
+      const skillMath = (skill) => {
+        let result = sheet[getName(skill)]
+        ? parseInt(sheet[getName(skill)])
+        : 0;
+        if(["Climb", "Swim"].includes(skill)) {
+          result += Math.floor(parseInt((sheet.strength - 10) / 2))
+          return result;
+        }
+        if([
+          "Acrobatics",
+          "Disable Device",
+          "Escape Artist",
+          "Fly",
+          "Ride",
+          "Sleight Of Hand",
+          "Stealth",
+        ].includes(skill)) {
+          result += Math.floor(parseInt((sheet.dexterity - 10) / 2))
+          return result;
+        }
+        if([
+          "Appraise",
+          "Craft",
+          "Linguistics",
+          "Knowledge(Arcana)",
+          "Knowledge(Dungeoneering)",
+          "Knowledge(Engineering)",
+          "Knowledge(Geography)",
+          "Knowledge(History)",
+          "Knowledge(Local)",
+          "Knowledge(Nature)",
+          "Knowledge(Nobility)",
+          "Knowledge(Planes)",
+          "Knowledge(Religion)",
+          "Spellcraft",
+        ].includes(skill)) {
+          result += Math.floor(parseInt((sheet.intelligence - 10) / 2))
+          return result;
+        }
+        if(["Heal","Perception","Profession", "Survival"].includes(skill)) {
+          result += Math.floor(parseInt((sheet.wisdom - 10) / 2))
+          return result;
+        }
+        if([
+          "Use Magic Device",
+          "Perform",
+          "Intimidate",
+          "Handle Animal",
+          "Bluff",
+          "Disguise",
+          "Diplomacy"
+        ].includes(skill)) {
+          result += Math.floor(parseInt((sheet.charisma - 10) / 2))
+          return result;
+        }
+      }
+
+      const skillMod = (skill) => {
+        let result = 0;
+        if(["Climb", "Swim"].includes(skill)) {
+          result += Math.floor(parseInt((sheet.strength - 10) / 2))
+          return result;
+        }
+        if([
+          "Acrobatics",
+          "Disable Device",
+          "Escape Artist",
+          "Fly",
+          "Ride",
+          "Sleight Of Hand",
+          "Stealth",
+        ].includes(skill)) {
+          result += Math.floor(parseInt((sheet.dexterity - 10) / 2))
+          return result;
+        }
+        if([
+          "Appraise",
+          "Craft",
+          "Linguistics",
+          "Knowledge(Arcana)",
+          "Knowledge(Dungeoneering)",
+          "Knowledge(Engineering)",
+          "Knowledge(Geography)",
+          "Knowledge(History)",
+          "Knowledge(Local)",
+          "Knowledge(Nature)",
+          "Knowledge(Nobility)",
+          "Knowledge(Planes)",
+          "Knowledge(Religion)",
+          "Spellcraft",
+        ].includes(skill)) {
+          result += Math.floor(parseInt((sheet.intelligence - 10) / 2))
+          return result;
+        }
+        if(["Heal","Perception","Profession", "Survival"].includes(skill)) {
+          result += Math.floor(parseInt((sheet.wisdom - 10) / 2))
+          return result;
+        }
+        if([
+          "Use Magic Device",
+          "Perform",
+          "Intimidate",
+          "Handle Animal",
+          "Bluff",
+          "Disguise",
+          "Diplomacy"
+        ].includes(skill)) {
+          result += Math.floor(parseInt((sheet.charisma - 10) / 2))
+          return result;
+        }
+      }
+
     return (
         <>
             <Col md={{offset:2}}>
@@ -47,10 +159,10 @@ const Skills = ({skill, handleChange, sheet}) => {
                         <Input name={getName(skill)} defaultValue={sheet[getName(skill)]} onChange={((e) => handleChange(e))}/>
                     </Col> +
                     <Col md={2}>
-                        <Input readOnly value />
+                        <Input readOnly value={skillMod(skill)} />
                     </Col> =
                     <Col md={2}>
-                        <Input readOnly value />
+                        <Input readOnly value={skillMath(skill)} />
                     </Col>
                 </Row>
             </Col>

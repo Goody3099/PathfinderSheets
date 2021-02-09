@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using PathfinderSheets.Models;
 using PathfinderSheets.Repository;
 using System;
 using System.Collections.Generic;
@@ -22,8 +23,15 @@ namespace PathfinderSheets.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var classes = _repo.Get2();
+            var classes = _repo.Get();
             return Ok(classes);
+        }
+
+        [HttpGet("{level}/{classDataId}")]
+        public IActionResult Get(int level, int classDataId)
+        {
+            var LevelClassName = _repo.GetByLevelClassName(level, classDataId);
+            return Ok(LevelClassName);
         }
     }
 }

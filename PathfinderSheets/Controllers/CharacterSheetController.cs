@@ -27,15 +27,15 @@ namespace PathfinderSheets.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var currentUser = GetCurrentUserProfile();
-            var characterSheets = _characterSheetRepo.GetCharacterSheetsByUserProfileId(currentUser.Id);
+            //var currentUser = GetCurrentUserProfile();
+            var characterSheets = _characterSheetRepo.GetCharacterSheetsByUserProfileId(1);
             List<SheetDetails> sheetDetails = new List<SheetDetails>();
             foreach (var character in characterSheets)
             {
                 sheetDetails.Add(new SheetDetails()
                 {
                     Alignment = character.Alignment,
-                    Class = character.Class,
+                    ClassData = character.ClassData,
                     Race = character.Race,
                     CharacterSheet = _characterSheetRepo.GetById(character.Id),
                     UserProfile = character.UserProfile,
@@ -86,11 +86,10 @@ namespace PathfinderSheets.Controllers
             existingSheet.AlignmentId = sheet.AlignmentId;
             existingSheet.Appraise = sheet.Appraise;
             existingSheet.ArmorClass = sheet.ArmorClass;
-            existingSheet.BasicAttackBonus = sheet.BasicAttackBonus;
             existingSheet.Bluff = sheet.Bluff;
             existingSheet.CharacterLevel = sheet.CharacterLevel;
             existingSheet.Charisma = sheet.Charisma;
-            existingSheet.ClassId = sheet.ClassId;
+            existingSheet.ClassDataId = sheet.ClassDataId;
             existingSheet.Climb = sheet.Climb;
             existingSheet.ClimbSpeed = sheet.ClimbSpeed;
             existingSheet.CMBouns = sheet.CMBouns;
@@ -107,7 +106,6 @@ namespace PathfinderSheets.Controllers
             existingSheet.FlatFootedAC = sheet.FlatFootedAC;
             existingSheet.Fly = sheet.Fly;
             existingSheet.FlySpeed = sheet.FlySpeed;
-            existingSheet.Fortitude = sheet.Fortitude;
             existingSheet.Gold = sheet.Gold;
             existingSheet.HandleAnimal = sheet.HandleAnimal;
             existingSheet.Heal = sheet.Heal;
@@ -118,6 +116,7 @@ namespace PathfinderSheets.Controllers
             existingSheet.KnowledgeArcana = sheet.KnowledgeArcana;
             existingSheet.KnowledgeDungeoneering = sheet.KnowledgeDungeoneering;
             existingSheet.KnowledgeGeography = sheet.KnowledgeGeography;
+            existingSheet.KnowledgeEngineering = sheet.KnowledgeEngineering;
             existingSheet.KnowledgeHistory = sheet.KnowledgeHistory;
             existingSheet.KnowledgeLocal = sheet.KnowledgeLocal;
             existingSheet.KnowledgeNature = sheet.KnowledgeNature;
@@ -129,16 +128,17 @@ namespace PathfinderSheets.Controllers
             existingSheet.MaximumHealth = sheet.MaximumHealth;
             existingSheet.Melee = sheet.Melee;
             existingSheet.NextLevelEXP = sheet.NextLevelEXP;
+            existingSheet.Perform = sheet.Perform;
             existingSheet.Perception = sheet.Perception;
             existingSheet.Platnium = sheet.Platnium;
             existingSheet.Profession = sheet.Profession;
             existingSheet.RaceId = sheet.RaceId;
             existingSheet.Ranged = sheet.Ranged;
-            existingSheet.Reflex = sheet.Reflex;
             existingSheet.Ride = sheet.Ride;
             existingSheet.SenseMotive = sheet.SenseMotive;
             existingSheet.Silver = sheet.Silver;
             existingSheet.SleightOfHand = sheet.SleightOfHand;
+            existingSheet.Spellcraft = sheet.Spellcraft;
             existingSheet.SpellResistance = sheet.SpellResistance;
             existingSheet.Stealth = sheet.Stealth;
             existingSheet.Strength = sheet.Strength;
@@ -149,7 +149,6 @@ namespace PathfinderSheets.Controllers
             existingSheet.TouchAC = sheet.TouchAC;
             existingSheet.UseMagicDevice = sheet.UseMagicDevice;
             existingSheet.UserProfileId = sheet.UserProfileId;
-            existingSheet.Will = sheet.Will;
             existingSheet.Wisdom = sheet.Wisdom;
             existingSheet.Armor = sheet.Armor;
             existingSheet.CharacterFeats = sheet.CharacterFeats;

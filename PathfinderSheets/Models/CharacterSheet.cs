@@ -10,18 +10,17 @@ namespace PathfinderSheets.Models
     {
         public Alignment Alignment { get; set; }
         public Class Class { get; set; }
+        public ClassData ClassData { get; set; }
         public int Acrobatics { get; set; }
         public int Age { get; set; }
-        [Required]
         public int AlignmentId { get; set; }
         public int Appraise { get; set; }
         public int ArmorClass { get; set; }
-        public int BasicAttackBonus { get; set; }
         public int Bluff { get; set; }
         public int CharacterLevel { get; set; }
         public int Charisma { get; set; }
-        [Required]
         public int ClassId { get; set; }
+        public int ClassDataId { get; set; }
         public int Climb { get; set; }
         public int ClimbSpeed { get; set; }
         public int CMBouns { get; set; }
@@ -38,7 +37,6 @@ namespace PathfinderSheets.Models
         public int FlatFootedAC { get; set; }
         public int Fly { get; set; }
         public int FlySpeed { get; set; }
-        public int Fortitude { get; set; }
         public int Gold { get; set; }
         public int HandleAnimal { get; set; }
         public int Heal { get; set; }
@@ -48,6 +46,7 @@ namespace PathfinderSheets.Models
         public int Intimidate { get; set; }
         public int KnowledgeArcana { get; set; }
         public int KnowledgeDungeoneering { get; set; }
+        public int KnowledgeEngineering { get; set; }
         public int KnowledgeGeography { get; set; }
         public int KnowledgeHistory { get; set; }
         public int KnowledgeLocal { get; set; }
@@ -61,16 +60,16 @@ namespace PathfinderSheets.Models
         public int Melee { get; set; }
         public int NextLevelEXP { get; set; }
         public int Perception { get; set; }
+        public int Perform { get; set; }
         public int Platnium { get; set; }
         public int Profession { get; set; }
-        [Required]
         public int RaceId { get; set; }
         public int Ranged { get; set; }
-        public int Reflex { get; set; }
         public int Ride { get; set; }
         public int SenseMotive { get; set; }
         public int Silver { get; set; }
         public int SleightOfHand { get; set; }
+        public int Spellcraft { get; set; }
         public int SpellResistance { get; set; }
         public int Stealth { get; set; }
         public int Strength { get; set; }
@@ -81,7 +80,6 @@ namespace PathfinderSheets.Models
         public int TouchAC { get; set; }
         public int UseMagicDevice { get; set; }
         public int UserProfileId { get; set; }
-        public int Will { get; set; }
         public int Wisdom { get; set; }
         public Race Race { get; set; }
         public string Armor { get; set; }

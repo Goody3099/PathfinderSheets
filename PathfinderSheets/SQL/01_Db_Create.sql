@@ -10,6 +10,7 @@ GO
 DROP TABLE IF EXISTS [CharacterSheet];
 DROP TABLE IF EXISTS [Race];
 DROP TABLE IF EXISTS [Class];
+DROP TABLE IF EXISTS [ClassData];
 DROP TABLE IF EXISTS [Alignment];
 DROP TABLE IF EXISTS [UserProfile];
 GO
@@ -35,13 +36,13 @@ CREATE TABLE [CharacterSheet] (
   [Appraise] integer,
   [Armor] nvarchar(255),
   [ArmorClass] integer,
-  [BasicAttackBonus] integer,
   [Bluff] integer,
   [CharacterFeats] nvarchar(255),
   [CharacterLevel] integer,
   [CharacterName] nvarchar(255),
   [CharacterPicture] nvarchar(255),
   [Charisma] integer,
+  [ClassDataId] integer,
   [ClassId] integer,
   [Climb] integer,
   [ClimbSpeed] integer,
@@ -62,7 +63,6 @@ CREATE TABLE [CharacterSheet] (
   [FlatFootedAC] integer,
   [Fly] integer,
   [FlySpeed] integer,
-  [Fortitude] integer,
   [Gender] nvarchar(255),
   [Gold] integer,
   [Hair] nvarchar(255),
@@ -95,7 +95,6 @@ CREATE TABLE [CharacterSheet] (
   [Profession] integer,
   [RaceId] integer,
   [Ranged] integer,
-  [Reflex] integer,
   [Ride] integer,
   [SenseMotive] integer,
   [Silver] integer,
@@ -114,7 +113,6 @@ CREATE TABLE [CharacterSheet] (
   [UseMagicDevice] integer,
   [Weapon] nvarchar(255),
   [Weight] nvarchar(255),
-  [Will] integer,
   [Wisdom] integer,
 )
 GO
@@ -127,7 +125,7 @@ GO
 
 CREATE TABLE [Class] (
   [Id] integer PRIMARY KEY IDENTITY,
-  [ClassName] nvarchar(255),
+  [ClassDataId] integer,
   [CharacterLevel] integer,
   [BaB] integer,
   [Reflex] integer,
@@ -135,6 +133,12 @@ CREATE TABLE [Class] (
   [Fort] integer,
   [HitDie] integer,
   [SkillPoints] integer,
+)
+GO
+
+CREATE TABLE [ClassData] (
+[Id] integer PRIMARY KEY IDENTITY,
+[ClassName] nvarchar(225),
 )
 GO
 
@@ -157,5 +161,8 @@ GO
 ALTER TABLE [CharacterSheet] ADD FOREIGN KEY ([RaceId]) REFERENCES [Race] ([Id])
 GO
 
-ALTER TABLE [CharacterSheet] ADD FOREIGN KEY ([ClassId]) REFERENCES [Class] ([Id])
+ALTER TABLE [CharacterSheet] ADD FOREIGN KEY ([ClassDataId]) REFERENCES [ClassData] ([Id])
+GO
+
+ALTER TABLE [Class] ADD FOREIGN KEY ([ClassDataId]) REFERENCES [ClassData] ([Id])
 GO
