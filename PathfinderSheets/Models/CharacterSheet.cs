@@ -46,6 +46,7 @@ namespace PathfinderSheets.Models
         public int Intimidate { get; set; }
         public int KnowledgeArcana { get; set; }
         public int KnowledgeDungeoneering { get; set; }
+        public int KnowledgeEngineering { get; set; }
         public int KnowledgeGeography { get; set; }
         public int KnowledgeHistory { get; set; }
         public int KnowledgeLocal { get; set; }
@@ -59,6 +60,7 @@ namespace PathfinderSheets.Models
         public int Melee { get; set; }
         public int NextLevelEXP { get; set; }
         public int Perception { get; set; }
+        public int Perform { get; set; }
         public int Platnium { get; set; }
         public int Profession { get; set; }
         public int RaceId { get; set; }
@@ -67,6 +69,7 @@ namespace PathfinderSheets.Models
         public int SenseMotive { get; set; }
         public int Silver { get; set; }
         public int SleightOfHand { get; set; }
+        public int Spellcraft { get; set; }
         public int SpellResistance { get; set; }
         public int Stealth { get; set; }
         public int Strength { get; set; }

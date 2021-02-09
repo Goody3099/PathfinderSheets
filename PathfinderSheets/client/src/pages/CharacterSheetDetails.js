@@ -8,10 +8,10 @@ import { UserProfileContext } from "../providers/UserProfileProvider";
 const CharacterSheetDetails = () => {
 
     const [sheet, setSheet] = useState({});
-    console.log(sheet);
     const [alignments, setAlignments] = useState([]);
     const [classes, setClasses] = useState([]);
     const [races, setRaces] = useState([]);
+    const [data, setData] = useState({});
 
     const { id } = useParams();
 
@@ -24,17 +24,18 @@ const CharacterSheetDetails = () => {
     const getCharacterSheetById = () => {
         return getToken()
             .then((token) => {
-                fetch(`/api/charactersheet/${id}`, {
+                return fetch(`/api/charactersheet/${id}`, {
                     method: "GET",
                     headers: {
                         Authorization: `Bearer ${token}`,
                     },
-                })
-                    .then((res) => res.json())
-                    .then((sheet) => {
-                        setSheet(sheet);
-                    });
+                })                   
             })
+            .then((res) => res.json())
+            .then((sheet) => {
+                setSheet(sheet);
+                return sheet;
+            });
     }
 
     const updateCharacterSheet = () => {
@@ -69,15 +70,15 @@ const CharacterSheetDetails = () => {
             .then(res => setRaces(res))
     };
     
-    const getCharacterData = () => {
-         fetch(`/api/class/${sheet.characterLevel}/${sheet.classDataId}`)
+    const getCharacterData = (s) => {
+         fetch(`/api/class/${s.characterLevel}/${s.classDataId}`)
         .then(res => res.json())
-        .then(res => setSheet(res))
+        .then(res => setData(res))
     };
 
     const skillArray = ["Acrobatics", "Appraise", "Bluff", "Climb", "Craft", "Diplomacy", "Disable Device", "Escape Artist", "Fly", "Handle Animal", "Heal", "Intimidate",
         "Knowledge(Arcana)", "Knowledge(Dungeoneering)", "Knowledge(Engineering)", "Knowledge(Geography)", "Knowledge(History)", "Knowledge(Local)", "Knowledge(Nature)",
-        "Knowledge(Nobility)", "Knowledge(Planes)", "Knowledge(Religion)", "Linguistics", "Perception", "Perform", "Profession", "Ride", "Sense Motive", "Sleight of Hand",
+        "Knowledge(Nobility)", "Knowledge(Planes)", "Knowledge(Religion)", "Linguistics", "Perception", "Perform", "Profession", "Ride", "Sense Motive", "Sleight Of Hand",
         "Spellcraft", "Stealth", "Survival", "Swim", "Use Magic Device"];
 
     const attributeArray = ["Strength", "Dexterity", "Constitution", "Intelligence", "Wisdom", "Charisma"]
@@ -85,7 +86,7 @@ const CharacterSheetDetails = () => {
     const handleChange = (e) => {
         const newSheet = { ...sheet };
         newSheet[e.target.name] = e.target.value;
-        setSheet(newSheet);
+        return setSheet(newSheet);
     }
 
     useEffect(() => {
@@ -93,7 +94,7 @@ const CharacterSheetDetails = () => {
         getClasses();
         getRaces();
         getCharacterSheetById()
-        // .then(getCharacterData);
+        .then(getCharacterData);
     }, [])
 
     useEffect(() => {
@@ -104,12 +105,49 @@ const CharacterSheetDetails = () => {
     }, [sheet]);
 
     const addSkillPoints = () => {
-        let sum;
+        let sum = 0;
         skillArray.forEach(skill => {
-            sum += parseInt(sheet[skill])
+            console.log(sheet[getName(skill)], skill, sheet)
+            sum += parseInt(sheet[getName(skill)])
         });
+        console.log(sum)
         return sum;
     };
+
+    const getName = (s) => {
+        if (s === "Knowledge(Arcana)") {
+          return "knowledgeArcana";
+        }
+        if (s === "Knowledge(Dungeoneering)") {
+          return "knowledgeDungeoneering";
+        }
+        if (s === "Knowledge(Engineering)") {
+          return "knowledgeEngineering";
+        }
+        if (s === "Knowledge(Geography)") {
+          return "knowledgeGeography";
+        }
+        if (s === "Knowledge(History)") {
+          return "knowledgeHistory";
+        }
+        if (s === "Knowledge(Local)") {
+          return "knowledgeLocal";
+        }
+        if (s === "Knowledge(Nature)") {
+          return "knowledgeNature";
+        }
+        if (s === "Knowledge(Nobility)") {
+          return "knowledgeNobility";
+        }
+        if (s === "Knowledge(Planes)") {
+          return "knowledgePlanes";
+        }
+        if (s === "Knowledge(Religion)") {
+          return "knowledgeReligion";
+        }
+        let string = s.replace(/\s+/g, "");
+        return string[0].toLowerCase() + string.slice(1);
+      };
 
     return (
         <Form>
@@ -148,7 +186,8 @@ const CharacterSheetDetails = () => {
                     <Row>
                         <Col md={5}>
                             <Label>Class</Label>
-                            <Input type="select" name="classDataId" onChange={((e) => { handleChange(e) })}>
+                            <Input type="select" name="classDataId" onChange={((e) => { handleChange(e) 
+                            getCharacterData({characterLevel: sheet.characterLevel, classDataId: e.target.value})})}>
                                 <option disabled hidden>Select a Class</option>
                                 {classes.map((classx) => (
                                     <option value={classx.id} key={classx.id} selected={sheet.classDataId === classx.id}>
@@ -159,7 +198,8 @@ const CharacterSheetDetails = () => {
                         </Col>
                         <Col md={1}>
                             <Label>Level</Label>
-                            <Input type="select" name="characterLevel" onChange={((e) => { handleChange(e) })} >
+                            <Input type="select" name="characterLevel" onChange={((e) => { handleChange(e) 
+                            getCharacterData({characterLevel: e.target.value, classDataId: sheet.classDataId})})} >
                                 <option selected={sheet.characterLevel === 1}>1</option>
                                 <option selected={sheet.characterLevel === 2}>2</option>
                                 <option selected={sheet.characterLevel === 3}>3</option>
@@ -255,15 +295,15 @@ const CharacterSheetDetails = () => {
                     <Row>
                         <Col md={{ size: 2, offset: 3 }}>
                             <Label>Fortitude</Label>
-                            <Input name="fortitude" defaultValue={sheet.fort} onChange={((e) => handleChange(e))} />
+                            <Input name="fortitude" defaultValue={data.fort} onChange={((e) => handleChange(e))} />
                         </Col>
                         <Col md={2}>
                             <Label>Reflex</Label>
-                            <Input name="reflex" defaultValue={sheet.reflex} onChange={((e) => handleChange(e))} />
+                            <Input name="reflex" defaultValue={data.reflex} onChange={((e) => handleChange(e))} />
                         </Col>
                         <Col md={2}>
                             <Label>Will</Label>
-                            <Input name="will" defaultValue={sheet.will} onChange={((e) => handleChange(e))} />
+                            <Input name="will" defaultValue={data.will} onChange={((e) => handleChange(e))} />
                         </Col>
                     </Row>
                     <br></br>
@@ -299,7 +339,7 @@ const CharacterSheetDetails = () => {
                         </Col>
                         <Col md={2}>
                             <Label>Basic Attack Bonus</Label>
-                            <Input name="basicAttackBonus" defaultValue={sheet.baB} onChange={((e) => handleChange(e))} />
+                            <Input name="basicAttackBonus" defaultValue={data.baB} onChange={((e) => handleChange(e))} />
                         </Col>
                         <Col md={2}>
                             <Label>Melee</Label>
@@ -369,7 +409,7 @@ const CharacterSheetDetails = () => {
                         </Col>
                         <Col md={2}>
                             <Label>Total Skill Points</Label>
-                            <Input readOnly value />
+                            <Input readOnly value={(data.skillPoints + Math.floor((sheet.intelligence - 10) / 2)) * sheet.characterLevel} />
                         </Col>
                     </Row>
                     <br></br>

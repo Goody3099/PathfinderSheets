@@ -116,6 +116,7 @@ namespace PathfinderSheets.Controllers
             existingSheet.KnowledgeArcana = sheet.KnowledgeArcana;
             existingSheet.KnowledgeDungeoneering = sheet.KnowledgeDungeoneering;
             existingSheet.KnowledgeGeography = sheet.KnowledgeGeography;
+            existingSheet.KnowledgeEngineering = sheet.KnowledgeEngineering;
             existingSheet.KnowledgeHistory = sheet.KnowledgeHistory;
             existingSheet.KnowledgeLocal = sheet.KnowledgeLocal;
             existingSheet.KnowledgeNature = sheet.KnowledgeNature;
@@ -127,6 +128,7 @@ namespace PathfinderSheets.Controllers
             existingSheet.MaximumHealth = sheet.MaximumHealth;
             existingSheet.Melee = sheet.Melee;
             existingSheet.NextLevelEXP = sheet.NextLevelEXP;
+            existingSheet.Perform = sheet.Perform;
             existingSheet.Perception = sheet.Perception;
             existingSheet.Platnium = sheet.Platnium;
             existingSheet.Profession = sheet.Profession;
@@ -136,6 +138,7 @@ namespace PathfinderSheets.Controllers
             existingSheet.SenseMotive = sheet.SenseMotive;
             existingSheet.Silver = sheet.Silver;
             existingSheet.SleightOfHand = sheet.SleightOfHand;
+            existingSheet.Spellcraft = sheet.Spellcraft;
             existingSheet.SpellResistance = sheet.SpellResistance;
             existingSheet.Stealth = sheet.Stealth;
             existingSheet.Strength = sheet.Strength;
