@@ -27,15 +27,15 @@ namespace PathfinderSheets.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            var currentUser = GetCurrentUserProfile();
-            var characterSheets = _characterSheetRepo.GetCharacterSheetsByUserProfileId(currentUser.Id);
+            //var currentUser = GetCurrentUserProfile();
+            var characterSheets = _characterSheetRepo.GetCharacterSheetsByUserProfileId(1);
             List<SheetDetails> sheetDetails = new List<SheetDetails>();
             foreach (var character in characterSheets)
             {
                 sheetDetails.Add(new SheetDetails()
                 {
                     Alignment = character.Alignment,
-                    Class = character.Class,
+                    ClassData = character.ClassData,
                     Race = character.Race,
                     CharacterSheet = _characterSheetRepo.GetById(character.Id),
                     UserProfile = character.UserProfile,

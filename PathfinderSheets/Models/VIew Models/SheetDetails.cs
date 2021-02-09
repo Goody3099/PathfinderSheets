@@ -9,6 +9,7 @@ namespace PathfinderSheets.Models.VIew_Models
     {
         public UserProfile UserProfile { get; set; }
         public Class Class { get; set; }
+        public ClassData ClassData { get; set; }
         public Race Race { get; set; }
         public Alignment Alignment { get; set; }
         public CharacterSheet CharacterSheet { get; set; }

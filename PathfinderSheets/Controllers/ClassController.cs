@@ -27,10 +27,10 @@ namespace PathfinderSheets.Controllers
             return Ok(classes);
         }
 
-        [HttpGet("{level}/{className}")]
-        public IActionResult Get(int level, string className)
+        [HttpGet("{level}/{classDataId}")]
+        public IActionResult Get(int level, int classDataId)
         {
-            var LevelClassName = _repo.GetByLevelClassName(level, className);
+            var LevelClassName = _repo.GetByLevelClassName(level, classDataId);
             return Ok(LevelClassName);
         }
     }

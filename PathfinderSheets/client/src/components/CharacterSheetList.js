@@ -23,7 +23,7 @@ const CharacterSheetList = ({sheets, getCharacterSheets}) => {
     })
     .then(e => getCharacterSheets())
   }
-
+  if(!sheets) return null;
     return (
       <Row>
       {sheets.map((sheet) => {
@@ -34,7 +34,7 @@ const CharacterSheetList = ({sheets, getCharacterSheets}) => {
                 <CardBody>
             <Link to={`/charactersheet/${sheet.characterSheet.id}`}>
                   <CardTitle tag="h5">{sheet.characterSheet.characterName}</CardTitle>
-                  <CardText tag="h6">Level {sheet.characterSheet.characterLevel} {sheet.race.raceName} {sheet.class.className}</CardText>
+                  <CardText tag="h6">Level {sheet.characterSheet.characterLevel} {sheet.race.raceName} {sheet.classData.className}</CardText>
             </Link>
                   <Button color="danger" onClick={toggle}>Delete</Button>
                   

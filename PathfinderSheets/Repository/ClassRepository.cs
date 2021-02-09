@@ -23,13 +23,10 @@ namespace PathfinderSheets.Repository
                 .ToList();
         }
 
-        public Class GetByLevelClassName(int level, string className)
+        public Class GetByLevelClassName(int level, int classDataId)
         {
-            var x = _context.ClassData
-                .Where(cd => cd.ClassName == className)
-                .FirstOrDefault();
             var y = _context.Class
-                .Where(c => c.ClassDataId == x.Id)
+                .Where(c => c.ClassDataId == classDataId)
                 .Where(c => c.CharacterLevel == level)
                 .FirstOrDefault();
             return y;

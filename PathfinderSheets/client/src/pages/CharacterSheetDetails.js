@@ -8,6 +8,7 @@ import { UserProfileContext } from "../providers/UserProfileProvider";
 const CharacterSheetDetails = () => {
 
     const [sheet, setSheet] = useState({});
+    console.log(sheet);
     const [alignments, setAlignments] = useState([]);
     const [classes, setClasses] = useState([]);
     const [races, setRaces] = useState([]);
@@ -21,7 +22,7 @@ const CharacterSheetDetails = () => {
     const history = useHistory();
 
     const getCharacterSheetById = () => {
-        getToken()
+        return getToken()
             .then((token) => {
                 fetch(`/api/charactersheet/${id}`, {
                     method: "GET",
@@ -67,6 +68,12 @@ const CharacterSheetDetails = () => {
             .then(res => res.json())
             .then(res => setRaces(res))
     };
+    
+    const getCharacterData = () => {
+         fetch(`/api/class/${sheet.characterLevel}/${sheet.classDataId}`)
+        .then(res => res.json())
+        .then(res => setSheet(res))
+    };
 
     const skillArray = ["Acrobatics", "Appraise", "Bluff", "Climb", "Craft", "Diplomacy", "Disable Device", "Escape Artist", "Fly", "Handle Animal", "Heal", "Intimidate",
         "Knowledge(Arcana)", "Knowledge(Dungeoneering)", "Knowledge(Engineering)", "Knowledge(Geography)", "Knowledge(History)", "Knowledge(Local)", "Knowledge(Nature)",
@@ -85,13 +92,14 @@ const CharacterSheetDetails = () => {
         getAlignments();
         getClasses();
         getRaces();
-        getCharacterSheetById();
+        getCharacterSheetById()
+        // .then(getCharacterData);
     }, [])
 
     useEffect(() => {
         const timer = setTimeout(() => {
             updateCharacterSheet();
-        }, 3000);
+        }, 1000);
         return () => clearInterval(timer);
     }, [sheet]);
 
@@ -247,15 +255,15 @@ const CharacterSheetDetails = () => {
                     <Row>
                         <Col md={{ size: 2, offset: 3 }}>
                             <Label>Fortitude</Label>
-                            <Input name="fortitude" defaultValue onChange={((e) => handleChange(e))} />
+                            <Input name="fortitude" defaultValue={sheet.fort} onChange={((e) => handleChange(e))} />
                         </Col>
                         <Col md={2}>
                             <Label>Reflex</Label>
-                            <Input name="reflex" defaultValue onChange={((e) => handleChange(e))} />
+                            <Input name="reflex" defaultValue={sheet.reflex} onChange={((e) => handleChange(e))} />
                         </Col>
                         <Col md={2}>
                             <Label>Will</Label>
-                            <Input name="will" defaultValue onChange={((e) => handleChange(e))} />
+                            <Input name="will" defaultValue={sheet.will} onChange={((e) => handleChange(e))} />
                         </Col>
                     </Row>
                     <br></br>
@@ -291,7 +299,7 @@ const CharacterSheetDetails = () => {
                         </Col>
                         <Col md={2}>
                             <Label>Basic Attack Bonus</Label>
-                            <Input name="basicAttackBonus" defaultValue onChange={((e) => handleChange(e))} />
+                            <Input name="basicAttackBonus" defaultValue={sheet.baB} onChange={((e) => handleChange(e))} />
                         </Col>
                         <Col md={2}>
                             <Label>Melee</Label>

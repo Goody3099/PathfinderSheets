@@ -10,16 +10,16 @@ namespace PathfinderSheets.Models
     {
         public Alignment Alignment { get; set; }
         public Class Class { get; set; }
+        public ClassData ClassData { get; set; }
         public int Acrobatics { get; set; }
         public int Age { get; set; }
-        [Required]
         public int AlignmentId { get; set; }
         public int Appraise { get; set; }
         public int ArmorClass { get; set; }
         public int Bluff { get; set; }
         public int CharacterLevel { get; set; }
         public int Charisma { get; set; }
-        [Required]
+        public int ClassId { get; set; }
         public int ClassDataId { get; set; }
         public int Climb { get; set; }
         public int ClimbSpeed { get; set; }
@@ -61,7 +61,6 @@ namespace PathfinderSheets.Models
         public int Perception { get; set; }
         public int Platnium { get; set; }
         public int Profession { get; set; }
-        [Required]
         public int RaceId { get; set; }
         public int Ranged { get; set; }
         public int Ride { get; set; }

@@ -43,6 +43,7 @@ CREATE TABLE [CharacterSheet] (
   [CharacterPicture] nvarchar(255),
   [Charisma] integer,
   [ClassDataId] integer,
+  [ClassId] integer,
   [Climb] integer,
   [ClimbSpeed] integer,
   [CMBouns] integer,
