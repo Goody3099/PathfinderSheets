@@ -167,7 +167,7 @@ const SkillsForm = ({skill, handleChange, sheet}) => {
                 <Row>
                         <Label md={2}>{skill}</Label>
                     <Col md={2}>
-                        <Input name={getName(skill)} defaultValue="0" onChange={((e) => handleChange(e))}/>
+                        <Input name={getName(skill)} defaultValue={checkNaN(skill)} onChange={((e) => handleChange(e))}/>
                     </Col> +
                     <Col md={2}>
                         <Input readOnly value={checkNaN(skill)} />

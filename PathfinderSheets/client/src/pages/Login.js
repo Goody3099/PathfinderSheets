@@ -18,12 +18,10 @@ const Login = () => {
     login(email, password)
       .then((user) => {
         setLoading(false);
-        console.log(user)
         history.push("/");
       })
       .catch((err) => {
         setLoading(false);
-        console.log(err)
       });
   };
 

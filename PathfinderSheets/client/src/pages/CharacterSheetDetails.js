@@ -107,10 +107,8 @@ const CharacterSheetDetails = () => {
     const addSkillPoints = () => {
         let sum = 0;
         skillArray.forEach(skill => {
-            console.log(sheet[getName(skill)], skill, sheet)
             sum += parseInt(sheet[getName(skill)])
         });
-        console.log(sum)
         return sum;
     };
 
