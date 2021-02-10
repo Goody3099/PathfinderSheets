@@ -100,17 +100,15 @@ const CharacterSheetDetails = () => {
     useEffect(() => {
         const timer = setTimeout(() => {
             updateCharacterSheet();
-        }, 1000);
+        }, 3000);
         return () => clearInterval(timer);
     }, [sheet]);
 
     const addSkillPoints = () => {
         let sum = 0;
         skillArray.forEach(skill => {
-            console.log(sheet[getName(skill)], skill, sheet)
             sum += parseInt(sheet[getName(skill)])
         });
-        console.log(sum)
         return sum;
     };
 
@@ -148,6 +146,10 @@ const CharacterSheetDetails = () => {
         let string = s.replace(/\s+/g, "");
         return string[0].toLowerCase() + string.slice(1);
       };
+
+      const babCalc = () => {
+          
+      }
 
     return (
         <Form>
@@ -295,15 +297,15 @@ const CharacterSheetDetails = () => {
                     <Row>
                         <Col md={{ size: 2, offset: 3 }}>
                             <Label>Fortitude</Label>
-                            <Input name="fortitude" defaultValue={data.fort} onChange={((e) => handleChange(e))} />
+                            <Input readOnly name="fortitude" defaultValue={data.fort} onChange={((e) => handleChange(e))} />
                         </Col>
                         <Col md={2}>
                             <Label>Reflex</Label>
-                            <Input name="reflex" defaultValue={data.reflex} onChange={((e) => handleChange(e))} />
+                            <Input readOnly name="reflex" defaultValue={data.reflex} onChange={((e) => handleChange(e))} />
                         </Col>
                         <Col md={2}>
                             <Label>Will</Label>
-                            <Input name="will" defaultValue={data.will} onChange={((e) => handleChange(e))} />
+                            <Input readOnly name="will" defaultValue={data.will} onChange={((e) => handleChange(e))} />
                         </Col>
                     </Row>
                     <br></br>
@@ -339,7 +341,7 @@ const CharacterSheetDetails = () => {
                         </Col>
                         <Col md={2}>
                             <Label>Basic Attack Bonus</Label>
-                            <Input name="basicAttackBonus" defaultValue={data.baB} onChange={((e) => handleChange(e))} />
+                            <Input readOnly name="basicAttackBonus" defaultValue={babCalc()} onChange={((e) => handleChange(e))} />
                         </Col>
                         <Col md={2}>
                             <Label>Melee</Label>

@@ -1,13 +1,19 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Col, Form, FormGroup, Input, Label, Row, Button } from 'reactstrap';
-import Attributes from './Attributes';
-import Skills from './Skills';
+import SkillsForm from './SkillsForm';
 import { UserProfileContext } from "../providers/UserProfileProvider";
 import { useHistory } from 'react-router-dom';
+import AttributesForm from './AttributesForm';
 
 const CharacterSheetForm = () => {
 
-    const [sheet, setSheet] = useState({});
+    const [sheet, setSheet] = useState({
+        Strength: 10, Dexterity: 10, Constitution: 10, Intelligence: 10, Wisdom: 10, Charisma: 10,
+        Acrobatics: 0, Appraise: 0, Bluff: 0, Climb: 0, Craft: 0, Diplomacy: 0,
+        DisableDevice: 0, EscapeArtist: 0, Fly: 0, HandleAnimal: 0, Heal: 0, Intimidate: 0,
+        KnowledgeArcana: 0, KnowledgeDungeoneering: 0, KnowledgeEngineering: 0, KnowledgeGeography: 0, KnowledgeHistory: 0, KnowledgeLocal: 0,
+        KnowledgeNature: 0, KnowledgeNobility: 0, KnowledgePlanes: 0, KnowledgeReligion: 0, Linguistics: 0, Perception: 0,
+        Perform: 0, Profession: 0, Ride: 0, SenseMotive: 0, SleightOfHand: 0, Spellcraft: 0, Stealth: 0, Survival: 0, Swim: 0, UseMagicDevice: 0,});
     const [alignments, setAlignments] = useState([]);
     const [classes, setClasses] = useState([]);
     const [races, setRaces] = useState([]);
@@ -199,7 +205,7 @@ const CharacterSheetForm = () => {
             <Row>
                 <Col md={6}>
                     <h1>Attributes</h1>
-                    {attributeArray.map(attribute => <Attributes key={attribute} attribute={attribute} handleChange={handleChange} sheet={sheet} />)}
+                    {attributeArray.map(attribute => <AttributesForm key={attribute} attribute={attribute} handleChange={handleChange} sheet={sheet} />)}
                     <h1>Health</h1>
                     <Row>
                         <Col md={{ size: 2, offset: 4 }}>
@@ -321,16 +327,16 @@ const CharacterSheetForm = () => {
                 </Col>
                 <Col md={6}>
                     <h1>Skills</h1>
-                    {skillArray.map(skill => <Skills key={skill} skill={skill} sheet={sheet} handleChange={handleChange} />)}
+                    {skillArray.map(skill => <SkillsForm key={skill} skill={skill} sheet={sheet} handleChange={handleChange} />)}
                     <br></br>
                     <Row>
                         <Col md={{ size: 2, offset: 4 }}>
                             <Label>Skill Points Used</Label>
-                            <Input readOnly value />
+                            <Input readOnly value={0} />
                         </Col>
                         <Col md={2}>
                             <Label>Total Skill Points</Label>
-                            <Input readOnly value />
+                            <Input readOnly value={0} />
                         </Col>
                     </Row>
                     <br></br>
