@@ -179,12 +179,12 @@ const SkillsForm = ({skill, handleChange, sheet}) => {
                         <Label md={2}>{skill}</Label>
                     <Col md={2}>
                         <Input name={getName(skill)} onChange={((e) => handleChange(e))}/>
-                    </Col> +
+                    </Col> 
                     <Col md={2}>
-                        <Input readOnly value={checkNaNMod(skill)} />
-                    </Col> =
+                        <Input hidden readOnly value={checkNaNMod(skill)} />
+                    </Col> 
                     <Col md={2}>
-                        <Input readOnly value={checkNaNTotal(skill)} />
+                        <Input hidden readOnly value={checkNaNTotal(skill)} />
                     </Col>
                 </Row>
             </Col>
