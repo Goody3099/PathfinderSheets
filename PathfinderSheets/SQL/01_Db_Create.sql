@@ -73,6 +73,7 @@ CREATE TABLE [CharacterSheet] (
   [Inititiative] integer,
   [Intelligence] integer,
   [Intimidate] integer,
+  [Inventory] nvarchar (255),
   [KnowledgeArcana] integer,
   [KnowledgeDungeoneering] integer,
   [KnowledgeEngineering] integer,

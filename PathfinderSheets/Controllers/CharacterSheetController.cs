@@ -113,6 +113,7 @@ namespace PathfinderSheets.Controllers
             existingSheet.Inititiative = sheet.Inititiative;
             existingSheet.Intelligence = sheet.Intelligence;
             existingSheet.Intimidate = sheet.Intimidate;
+            existingSheet.Inventory = sheet.Inventory;
             existingSheet.KnowledgeArcana = sheet.KnowledgeArcana;
             existingSheet.KnowledgeDungeoneering = sheet.KnowledgeDungeoneering;
             existingSheet.KnowledgeGeography = sheet.KnowledgeGeography;

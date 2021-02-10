@@ -132,7 +132,7 @@ const SkillsForm = ({skill, handleChange, sheet}) => {
           result += Math.floor(parseInt((sheet.intelligence - 10) / 2))
           return result;
         }
-        if(["Heal","Perception","Profession", "Survival"].includes(skill)) {
+        if(["Heal","Perception","Profession", "Survival", "Sense Motive"].includes(skill)) {
           result += Math.floor(parseInt((sheet.wisdom - 10) / 2))
           return result;
         }
@@ -150,7 +150,7 @@ const SkillsForm = ({skill, handleChange, sheet}) => {
         }
       }
 
-      const checkNaN = (skill) => {
+      const checkNaNMod = (skill) => {
           if(isNaN(skillMod(skill)))
           {
             return 0;
@@ -161,19 +161,30 @@ const SkillsForm = ({skill, handleChange, sheet}) => {
           }
       }
 
+      const checkNaNTotal = (skill) => {
+        if(isNaN(skillMath(skill)))
+        {
+          return 0;
+        }
+        else 
+        {
+            return skillMod(skill)
+        }
+    }
+
     return (
         <>
             <Col md={{offset:2}}>
                 <Row>
                         <Label md={2}>{skill}</Label>
                     <Col md={2}>
-                        <Input name={getName(skill)} defaultValue={checkNaN(skill)} onChange={((e) => handleChange(e))}/>
-                    </Col> +
+                        <Input name={getName(skill)} onChange={((e) => handleChange(e))}/>
+                    </Col> 
                     <Col md={2}>
-                        <Input readOnly value={checkNaN(skill)} />
-                    </Col> =
+                        <Input hidden readOnly value={checkNaNMod(skill)} />
+                    </Col> 
                     <Col md={2}>
-                        <Input readOnly value={checkNaN(skill)} />
+                        <Input hidden readOnly value={checkNaNTotal(skill)} />
                     </Col>
                 </Row>
             </Col>
