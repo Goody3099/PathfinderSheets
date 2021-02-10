@@ -43,7 +43,7 @@ const Skills = ({skill, handleChange, sheet}) => {
         ? parseInt(sheet[getName(skill)])
         : 0;
         if(["Climb", "Swim"].includes(skill)) {
-          result += Math.floor(parseInt((sheet.strength - 10) / 2))
+          result += Math.floor((parseInt(sheet.strength) - 10) / 2)
           return result;
         }
         if([
@@ -55,7 +55,7 @@ const Skills = ({skill, handleChange, sheet}) => {
           "Sleight Of Hand",
           "Stealth",
         ].includes(skill)) {
-          result += Math.floor(parseInt((sheet.dexterity - 10) / 2))
+          result += Math.floor((parseInt(sheet.dexterity) - 10) / 2)
           return result;
         }
         if([
@@ -74,11 +74,11 @@ const Skills = ({skill, handleChange, sheet}) => {
           "Knowledge(Religion)",
           "Spellcraft",
         ].includes(skill)) {
-          result += Math.floor(parseInt((sheet.intelligence - 10) / 2))
+          result += Math.floor((parseInt(sheet.intelligence) - 10) / 2) 
           return result;
         }
         if(["Heal","Perception","Profession", "Survival"].includes(skill)) {
-          result += Math.floor(parseInt((sheet.wisdom - 10) / 2))
+          result += Math.floor((parseInt(sheet.wisdom) - 10) / 2) 
           return result;
         }
         if([
@@ -90,7 +90,7 @@ const Skills = ({skill, handleChange, sheet}) => {
           "Disguise",
           "Diplomacy"
         ].includes(skill)) {
-          result += Math.floor(parseInt((sheet.charisma - 10) / 2))
+          result += Math.floor((parseInt(sheet.charisma) - 10) / 2) 
           return result;
         }
       }
@@ -98,7 +98,7 @@ const Skills = ({skill, handleChange, sheet}) => {
       const skillMod = (skill) => {
         let result = 0;
         if(["Climb", "Swim"].includes(skill)) {
-          result += Math.floor(parseInt((sheet.strength - 10) / 2))
+          result += Math.floor((parseInt(sheet.strength) - 10) / 2) 
           return result;
         }
         if([
@@ -110,7 +110,7 @@ const Skills = ({skill, handleChange, sheet}) => {
           "Sleight Of Hand",
           "Stealth",
         ].includes(skill)) {
-          result += Math.floor(parseInt((sheet.dexterity - 10) / 2))
+          result += Math.floor((parseInt(sheet.dexterity) - 10) / 2) 
           return result;
         }
         if([
@@ -129,11 +129,12 @@ const Skills = ({skill, handleChange, sheet}) => {
           "Knowledge(Religion)",
           "Spellcraft",
         ].includes(skill)) {
-          result += Math.floor(parseInt((sheet.intelligence - 10) / 2))
+          result += Math.floor((parseInt(sheet.intelligence) - 10) / 2) 
           return result;
         }
-        if(["Heal","Perception","Profession", "Survival"].includes(skill)) {
-          result += Math.floor(parseInt((sheet.wisdom - 10) / 2))
+        if(["Heal","Perception","Profession", "Survival", "Sense Motive"].includes(skill)) {
+          console.log(sheet)
+          result += Math.floor((parseInt(sheet.wisdom) - 10) / 2) 
           return result;
         }
         if([
@@ -145,7 +146,7 @@ const Skills = ({skill, handleChange, sheet}) => {
           "Disguise",
           "Diplomacy"
         ].includes(skill)) {
-          result += Math.floor(parseInt((sheet.charisma - 10) / 2))
+          result += Math.floor((parseInt(sheet.charisma) - 10) / 2) 
           return result;
         }
       }

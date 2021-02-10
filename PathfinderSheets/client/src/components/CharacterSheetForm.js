@@ -13,7 +13,8 @@ const CharacterSheetForm = () => {
         DisableDevice: 0, EscapeArtist: 0, Fly: 0, HandleAnimal: 0, Heal: 0, Intimidate: 0,
         KnowledgeArcana: 0, KnowledgeDungeoneering: 0, KnowledgeEngineering: 0, KnowledgeGeography: 0, KnowledgeHistory: 0, KnowledgeLocal: 0,
         KnowledgeNature: 0, KnowledgeNobility: 0, KnowledgePlanes: 0, KnowledgeReligion: 0, Linguistics: 0, Perception: 0,
-        Perform: 0, Profession: 0, Ride: 0, SenseMotive: 0, SleightOfHand: 0, Spellcraft: 0, Stealth: 0, Survival: 0, Swim: 0, UseMagicDevice: 0,});
+        Perform: 0, Profession: 0, Ride: 0, SenseMotive: 0, SleightOfHand: 0, Spellcraft: 0, Stealth: 0, Survival: 0, Swim: 0, UseMagicDevice: 0,
+        AlignmentId: 1, RaceId: 1, CharacterLevel: 1, ClassDataId: 1,});
     const [alignments, setAlignments] = useState([]);
     const [classes, setClasses] = useState([]);
     const [races, setRaces] = useState([]);
@@ -95,7 +96,7 @@ const CharacterSheetForm = () => {
                             <FormGroup>
                                 <Label>Alignment</Label>
                                 <Input type="select" name="alignmentId" required onChange={((e) => handleChange(e))}>
-                                    <option hidden>Select an Alignment</option>
+                                    {/* <option hidden>Select an Alignment</option> */}
                                     {alignments.map((alignment) => (
                                         <option value={alignment.id} key={alignment.id}>
                                             {alignment.alignmentName}
@@ -115,7 +116,7 @@ const CharacterSheetForm = () => {
                         <Col md={5}>
                             <Label>Class</Label>
                             <Input type="select" name="classDataId" required onChange={((e) => handleChange(e))}>
-                                <option hidden>Select a Class</option>
+                                {/* <option hidden>Select a Class</option> */}
                                 {classes.map((classx) => (
                                     <option value={classx.id} key={classx.id}>
                                         {classx.className}
@@ -126,7 +127,7 @@ const CharacterSheetForm = () => {
                         <Col md={1}>
                             <Label>Level</Label>
                             <Input type="select" name="characterLevel" required onChange={((e) => handleChange(e))} >
-                                <option hidden>Select a Level</option>
+                                {/* <option hidden>Select a Level</option> */}
                                 <option>1</option>
                                 <option>2</option>
                                 <option>3</option>
@@ -162,7 +163,7 @@ const CharacterSheetForm = () => {
                         <Col md={3}>
                             <Label>Race</Label>
                             <Input type="select" name="raceId" required onChange={((e) => handleChange(e))}>
-                                <option hidden>Select a Race</option>
+                                {/* <option hidden>Select a Race</option> */}
                                 {races.map((race) => (
                                     <option value={race.id} key={race.id}>
                                         {race.raceName}

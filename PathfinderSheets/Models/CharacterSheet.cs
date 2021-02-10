@@ -92,6 +92,7 @@ namespace PathfinderSheets.Models
         public string Hair { get; set; }
         public string Height { get; set; }
         public string Homeland { get; set; }
+        public string Inventory { get; set; }
         public string Languages { get; set; }
         public string Size { get; set; }
         public string Spells { get; set; }
