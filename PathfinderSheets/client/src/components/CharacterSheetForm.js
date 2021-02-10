@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Col, Form, FormGroup, Input, Label, Row, Button } from 'reactstrap';
-import Attributes from './Attributes';
-import Skills from './Skills';
+import SkillsForm from './SkillsForm';
 import { UserProfileContext } from "../providers/UserProfileProvider";
 import { useHistory } from 'react-router-dom';
+import AttributesForm from './AttributesForm';
 
 const CharacterSheetForm = () => {
 
@@ -199,7 +199,7 @@ const CharacterSheetForm = () => {
             <Row>
                 <Col md={6}>
                     <h1>Attributes</h1>
-                    {attributeArray.map(attribute => <Attributes key={attribute} attribute={attribute} handleChange={handleChange} sheet={sheet} />)}
+                    {attributeArray.map(attribute => <AttributesForm key={attribute} attribute={attribute} handleChange={handleChange} sheet={sheet} />)}
                     <h1>Health</h1>
                     <Row>
                         <Col md={{ size: 2, offset: 4 }}>
@@ -321,7 +321,7 @@ const CharacterSheetForm = () => {
                 </Col>
                 <Col md={6}>
                     <h1>Skills</h1>
-                    {skillArray.map(skill => <Skills key={skill} skill={skill} sheet={sheet} handleChange={handleChange} />)}
+                    {skillArray.map(skill => <SkillsForm key={skill} skill={skill} sheet={sheet} handleChange={handleChange} />)}
                     <br></br>
                     <Row>
                         <Col md={{ size: 2, offset: 4 }}>

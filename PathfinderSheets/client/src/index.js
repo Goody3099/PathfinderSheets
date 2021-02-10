@@ -6,15 +6,18 @@ import reportWebVitals from './reportWebVitals';
 import firebase from "firebase/app";
 
 const firebaseConfig = {
-  apiKey: process.env.REACT_APP_API_KEY,
+    apiKey: process.env.REACT_APP_API_KEY,
+    //     storageBucket: gs://pathfindersheets-beb88.appspot.com,
 };
 firebase.initializeApp(firebaseConfig);
 
+// const storage = firebase.storage();
+
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>,
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function
